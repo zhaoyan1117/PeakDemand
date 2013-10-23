@@ -1,0 +1,24 @@
+<%= render 'header/user_header' %>
+
+<h2> <%= @resource.name %> </h2>
+
+<h3>Description</h3>
+<p> <%= @resource.description %> </p>
+
+<h3>Availabe at</h3>
+<p><%= @resource.start_at %></p>
+
+<h3>End at</h3>
+<p> <%= @resource.end_at %> </p>
+
+<h4>Creator</h4>
+<p> <%= @resource.creator_name %> </p>
+
+<% if @user && @user.id == @resource.creator_id %>
+	<%= link_to "Edit Resource", edit_resource_url(@resource) %>
+	<%= link_to "Delete Resource", resource_url(@resource), :method => :delete %>
+<% end %>
+
+<br>
+<%= link_to "Go Back", resource_index_url %>
+

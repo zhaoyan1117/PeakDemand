@@ -1,7 +1,12 @@
 PeekDemand::Application.routes.draw do
   
-  root :to => 'welcome#index'
-  
+  root :to => 'resource#index'
+
+  devise_for :users
+
+  resources :resource
+
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

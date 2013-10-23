@@ -1,0 +1,28 @@
+<%= render 'header/user_header' %>
+
+<% if @resources.empty? %>
+	<h2> There is no resource currently!</h2>
+<% else %>
+	<h2> This is the resources we have now!</h2>
+	<table>
+		<tr>
+			<th>Resource Name</th>
+			<th>Start at</th>
+			<th>End at</th>
+			<th>Created by</th>
+		</tr>
+
+		<% @resources.each do |r| %>
+			<tr>
+				<td> <%= r.name %> </td>
+				<td> <%= r.start_at %> </td>
+				<td> <%= r.end_at %> </td>
+				<td> <%= r.creator_name %> </td>
+				<td> <%= link_to "Detail", resource_url(r) %> </td>
+			</tr>
+		<% end %>
+
+	</table>
+<% end %>
+
+<%= link_to "Create Resource", new_resource_url if @user && @user.is_provider %>

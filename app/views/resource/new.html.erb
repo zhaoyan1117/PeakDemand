@@ -1,0 +1,6 @@
+<%= render 'header/user_header' %>
+
+<h2>please create a new resource!</h2>
+
+<%= render :partial => 'resource/resource_form', 
+		   :locals => {:method => :post, :url => '/resource'} %>
