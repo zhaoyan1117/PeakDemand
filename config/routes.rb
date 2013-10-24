@@ -4,7 +4,9 @@ PeekDemand::Application.routes.draw do
 
   devise_for :users
 
-  resources :resource
+  resources :resource do
+    resources :demand, :except => :index
+  end
 
 
   # The priority is based upon order of creation:

@@ -4,21 +4,51 @@
 
 <h3>Description</h3>
 <p> <%= @resource.description %> </p>
+<br>
 
 <h3>Availabe at</h3>
 <p><%= @resource.start_at %></p>
+<br>
 
 <h3>End at</h3>
 <p> <%= @resource.end_at %> </p>
+<br>
 
-<h4>Creator</h4>
-<p> <%= @resource.creator_name %> </p>
+<h3>Creator</h3>
+<p> <%= @resource.provider_name %> </p>
 
-<% if @user && @user.id == @resource.creator_id %>
+<h3>Demands on this Resource</h3>
+<% if @resource.demands.empty? %>
+	<p> There is no demand on this resource currently!</p>
+<% else %>
+	<table>
+		<tr>
+			<th>Demanded by</th>
+			<th>Intensity</th>
+			<th>Start at</th>
+			<th>End at</th>
+		</tr>
+
+		<% @resource.demands.each do |d| %>
+			<tr>
+				<td> <%= d.consumer_name %> </td>
+				<td> <%= d.intensity %> </td>
+				<td> <%= d.start_at %> </td>
+				<td> <%= d.end_at %> </td>
+				<td> <%= link_to "Detail", resource_demand_url(@resource, d) %> </td>
+			</tr>
+		<% end %>
+
+	</table>
+<% end %>
+
+<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
+<br>
+
+<% if @user && @user == @resource.provider %>
 	<%= link_to "Edit Resource", edit_resource_url(@resource) %>
 	<%= link_to "Delete Resource", resource_url(@resource), :method => :delete %>
 <% end %>
 
 <br>
 <%= link_to "Go Back", resource_index_url %>
-

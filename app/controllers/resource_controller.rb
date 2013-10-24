@@ -51,10 +51,6 @@ class ResourceController < ApplicationController
 
   private
 
-  def get_current_user
-    @user = current_user
-  end
-
   def get_resource
     @resource = Resource.find(params[:id])
   end

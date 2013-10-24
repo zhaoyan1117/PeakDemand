@@ -4,3 +4,6 @@
 
 <%= render :partial => 'resource/resource_form', 
 		   :locals => {:method => :put, :url => resource_url(@resource) } %>
+
+<br>
+<%= link_to "Go Back", resource_url(@resource) %>
