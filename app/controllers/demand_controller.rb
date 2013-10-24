@@ -7,7 +7,7 @@ class DemandController < ApplicationController
 
   def new
     unless @user.is_consumer
-      flash[:error] = "Please register as a consumer to create demand!"      
+      flash[:error] = ["Please register as a consumer to create demand!"]     
       redirect_to resource_url(@resource)
     end
 
@@ -23,6 +23,7 @@ class DemandController < ApplicationController
     if d.save
       redirect_to resource_demand_url(@resource, d)
     else
+      flash[:error] = r.errors.full_messages
       redirect_to new_resource_demand_url(@resource)
     end
 

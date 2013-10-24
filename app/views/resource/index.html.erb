@@ -12,6 +12,7 @@
 			<th>Start at</th>
 			<th>End at</th>
 			<th>Created by</th>
+			<th>Number of Demands</th>
 		</tr>
 
 		<% @resources.each do |r| %>
@@ -20,6 +21,7 @@
 				<td> <%= r.start_at %> </td>
 				<td> <%= r.end_at %> </td>
 				<td> <%= r.provider_name %> </td>
+				<td> <%= r.get_number_of_demands %> </td>
 				<td> <%= link_to "Detail", resource_url(r) %> </td>
 			</tr>
 		<% end %>

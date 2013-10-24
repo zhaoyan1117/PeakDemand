@@ -7,13 +7,20 @@ class Demand < ActiveRecord::Base
   belongs_to :consumer, :class_name => 'User', :foreign_key => 'consumer_id'
   belongs_to :resource, :class_name => 'Resource', :foreign_key => 'resource_id'
 
-  validates :intensity, :presence => true,
-  				 :inclusion => {in: INTENSITIES}
-
+  validates :intensity, :presence => true, :inclusion => {in: INTENSITIES}
   validates :start_at, :end_at, :consumer, :resource, :presence => true
+  validate :validate_start_cannot_be_later_than_end
 
   def consumer_name
   	consumer.name
+  end
+
+  private
+
+  def validate_start_cannot_be_later_than_end
+    if start_at > end_at
+      errors[:base] << "Start date cannot be later than end date."
+    end
   end
 
 end

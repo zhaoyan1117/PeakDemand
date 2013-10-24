@@ -7,9 +7,23 @@ class Resource < ActiveRecord::Base
   has_many :consumers, :through => :demands
 
   validates :name, :provider, :presence => true
+  validate :validate_start_cannot_be_later_than_end
 
   def provider_name
   	provider.name
   end
 
+  def get_number_of_demands
+  	demands.size
+  end
+
+  private
+
+  def validate_start_cannot_be_later_than_end
+  	if start_at > end_at
+  		errors[:base] << "Start date cannot be later than end date."
+  	end
+  end
+
 end
+
