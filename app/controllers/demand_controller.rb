@@ -6,6 +6,11 @@ class DemandController < ApplicationController
   before_filter :get_current_user
 
   def new
+    unless @user.is_consumer
+      flash[:error] = "Please register as a consumer to create demand!"      
+      redirect_to resource_url(@resource)
+    end
+
     get_intensities
   end
 

@@ -16,11 +16,13 @@
   <div><%= f.label :password_confirmation %><br />
   <%= f.password_field :password_confirmation %></div>
 
+  <% if status == :sign_up  %>
   <div><%= f.label :I_am_a_provider %> </div>
   <%= f.check_box :is_provider %>
 
   <div><%= f.label :I_am_a_consumer %> </div>
   <%= f.check_box :is_consumer %>
+  <% end %>
 
   <% if status == :update %>
     <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />

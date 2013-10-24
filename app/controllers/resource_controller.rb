@@ -9,6 +9,10 @@ class ResourceController < ApplicationController
   end
 
   def new
+    unless @user.is_provider
+      flash[:error] = "Please register as a provider to create resource!"      
+      redirect_to resource_index_url
+    end
   end
 
   def create
