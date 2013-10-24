@@ -1,11 +1,15 @@
 class Resource < ActiveRecord::Base
 
-  attr_accessible :name, :description, :start_at, :end_at, :creator_id
+  attr_accessible :name, :description, :start_at, :end_at, :provider
   
-  belongs_to :user, :class_name => 'User', :foreign_key => 'creator_id'
+  belongs_to :provider, :class_name => 'User', :foreign_key => 'provider_id'
+  has_many :demands
+  has_many :consumers, :through => :demands
 
-  def creator_name
-  	User.find(creator_id).name
+  validates :name, :provider, :presence => true
+
+  def provider_name
+  	provider.name
   end
 
 end

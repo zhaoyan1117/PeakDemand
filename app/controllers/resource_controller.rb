@@ -69,7 +69,7 @@ class ResourceController < ApplicationController
                               r["end_at(2i)"].to_i, 
                               r["end_at(3i)"].to_i )
       
-      r["creator_id"] = @user.id
+      r["provider"] = @user
 
       r.delete "start_at(1i)"; r.delete "start_at(2i)"; r.delete "start_at(3i)"
       r.delete "end_at(1i)"; r.delete "end_at(2i)"; r.delete "end_at(3i)"

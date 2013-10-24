@@ -8,7 +8,7 @@ class CreateResources < ActiveRecord::Migration
     	t.date :start_at
     	t.date :end_at
 
-    	t.integer :creator_id, :null => false
+    	t.integer :provider_id, :null => false
 
       t.timestamps
     end
