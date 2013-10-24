@@ -8,17 +8,23 @@ class User < ActiveRecord::Base
   attr_accessible :name, :is_provider, :is_consumer, :is_administrator
 
   has_many :resources
+  validate :validate_must_have_identity
+  validates :email, :uniqueness => true
 
   def identity
   	identity = []
 
-  	if is_provider
-  		identity << "Provier"
-  	elsif is_consumer
-		identity << "Consumer"
-	end
+		identity << "Provider" if is_provider
+	  identity << "Consumer" if is_consumer
 
-	identity.join(", ")
+    identity.join(", ")
   end
+
+  def validate_must_have_identity
+    if !is_provider && !is_consumer
+      errors[:base] << "must have an identity!"
+    end
+  end
+
 
 end
