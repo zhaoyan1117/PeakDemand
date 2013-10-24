@@ -25,8 +25,4 @@
 	</table>
 <% end %>
 
-<% if @user && @user.is_provider %>
-	<%= link_to "Create Resource", new_resource_url %>
-<% else %>
-	Please sign in as a provider to create new resource.
-<% end %>
+<%= link_to "Create Resource", new_resource_url %>

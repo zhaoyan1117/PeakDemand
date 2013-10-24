@@ -20,7 +20,7 @@
 <br>
 <% if @user && @user == @demand.consumer %>
 	<%= link_to "Edit Demand", edit_resource_demand_url(@resource, @demand) %>
-	<%= link_to "Delete Demand", resource_demand_url(@resource, @demand), :method => :delete %>
+	<%= link_to "Delete Demand", resource_demand_url(@resource, @demand), :method => :delete, :confirm => 'Are you sure?' %>
 <% end %>
 
 <br>
