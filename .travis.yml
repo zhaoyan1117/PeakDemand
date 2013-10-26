@@ -6,7 +6,7 @@ before_script:
   - "bundle exec rake db:test:prepare"
   - "bundle exec rake db:seed"
 script:
-  - "bundle exec rake :test_with_coveralls"
+  - "bundle exec rake test_with_coveralls"
 notifications:
   email:
     - zhaoyan1117@berkeley.edu
