@@ -6,6 +6,7 @@
 
 ._*
 /coverage
+/vendor/bundle
 
 # Ignore bundler config
 /.bundle
