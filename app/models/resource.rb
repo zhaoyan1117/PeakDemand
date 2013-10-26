@@ -6,7 +6,7 @@ class Resource < ActiveRecord::Base
   has_many :demands
   has_many :consumers, :through => :demands
 
-  validates :name, :provider, :presence => true
+  validates :name, :provider, :start_at, :end_at, :presence => true
   validate :validate_start_cannot_be_later_than_end
 
   def provider_name
