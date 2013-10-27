@@ -62,18 +62,10 @@ class ResourceController < ApplicationController
 
   def get_resource_param
     params["resource"].clone.tap do |r|
-      r["start_at"] ||= Date.new( r["start_at(1i)"].to_i, 
-                                r["start_at(2i)"].to_i, 
-                                r["start_at(3i)"].to_i )
+      r["start_at"] ||= Date.new flatten_date_array r, "start_at"
+      r["end_at"] ||= Date.new flatten_date_array r, "end_at"
 
-      r["end_at"] ||= Date.new( r["end_at(1i)"].to_i, 
-                              r["end_at(2i)"].to_i, 
-                              r["end_at(3i)"].to_i )
-      
       r["provider"] = @user
-
-      r.delete "start_at(1i)"; r.delete "start_at(2i)"; r.delete "start_at(3i)"
-      r.delete "end_at(1i)"; r.delete "end_at(2i)"; r.delete "end_at(3i)"
     end
   end
 
