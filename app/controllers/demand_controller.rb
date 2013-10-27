@@ -66,8 +66,8 @@ class DemandController < ApplicationController
 
   def get_demand_param
     params["demand"].clone.tap do |d|
-      d["start_at"] ||= Date.new flatten_date_array d, "start_at"
-      d["end_at"] ||= Date.new flatten_date_array d, "end_at"
+      d["start_at"] ||= create_date d, "start_at"
+      d["end_at"] ||= create_date d, "end_at"
 
       d["consumer"] = @user
       d["resource"] = @resource

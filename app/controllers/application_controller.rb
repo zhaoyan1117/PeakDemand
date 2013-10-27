@@ -5,11 +5,12 @@ class ApplicationController < ActionController::Base
     @user = current_user
   end
   
-  def flatten_date_array hash, date
-    %w(1 2 3).map do |e|
-      result =  hash.delete "#{date}(#{e}i)"
-      result.to_i
-    end
+  def create_date hash, date
+    year = hash.delete "#{date}(#{1}i)"
+    month = hash.delete "#{date}(#{2}i)"
+    day = hash.delete "#{date}(#{3}i)"
+
+    Date.new year.to_i, month.to_i, day.to_i
   end
   
 end
