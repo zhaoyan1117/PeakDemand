@@ -64,11 +64,11 @@ class ResourceController < ApplicationController
     params["resource"].clone.tap do |r|
       r["start_at"] = Date.new( r["start_at(1i)"].to_i, 
                                 r["start_at(2i)"].to_i, 
-                                r["start_at(3i)"].to_i )
+                                r["start_at(3i)"].to_i ) unless r["start_at"]
 
       r["end_at"] = Date.new( r["end_at(1i)"].to_i, 
                               r["end_at(2i)"].to_i, 
-                              r["end_at(3i)"].to_i )
+                              r["end_at(3i)"].to_i ) unless r["end_at"]
       
       r["provider"] = @user
 
