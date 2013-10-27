@@ -23,7 +23,7 @@ class DemandController < ApplicationController
     if d.save
       redirect_to resource_demand_url(@resource, d)
     else
-      flash[:error] = r.errors.full_messages
+      flash[:error] = d.errors.full_messages
       redirect_to new_resource_demand_url(@resource)
     end
 
