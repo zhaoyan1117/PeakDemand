@@ -15,12 +15,12 @@ group :development, :test do
   gem 'capybara'
   gem 'launchy'
   gem 'rspec-rails'
+  gem 'factory_girl_rails'
 end
 
 group :test do
   gem 'cucumber-rails', :require => false
   gem 'cucumber-rails-training-wheels'
-  gem 'factory_girl_rails'
   gem 'simplecov', :require => false
   gem 'coveralls', :require => false
 end
