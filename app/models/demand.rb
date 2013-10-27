@@ -8,25 +8,14 @@ class Demand < ActiveRecord::Base
 
   validates :intensity, :presence => true, :inclusion => {in: INTENSITIES}
   validates :start_at, :end_at, :consumer, :resource, :presence => true
-  validate :validate_start_cannot_be_later_than_end
   validate :validate_date_range_should_be_in_resource_date_range
+  include DateRangeValidation
 
   def consumer_name
   	consumer.name
   end
 
   private
-
-  def validate_start_cannot_be_later_than_end
-    unless start_at && end_at
-      errors[:date_range] << "Nil columns!" 
-      return
-    end
-      
-    if start_at > end_at
-      errors[:date_range] << "Start date cannot be later than end date."
-    end
-  end
 
   def validate_date_range_should_be_in_resource_date_range
     unless resource && start_at && end_at
@@ -38,6 +27,5 @@ class Demand < ActiveRecord::Base
       errors[:resource_date_range] << "Validate date range should be in resource date range."
     end
   end
-
 
 end

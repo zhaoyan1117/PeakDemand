@@ -7,27 +7,14 @@ class Resource < ActiveRecord::Base
   has_many :consumers, :through => :demands
 
   validates :name, :provider, :start_at, :end_at, :presence => true
-  validate :validate_start_cannot_be_later_than_end
+  include DateRangeValidation
 
   def provider_name
-  	provider.name
+    provider.name
   end
 
   def get_number_of_demands
-  	demands.size
-  end
-
-  private
-
-  def validate_start_cannot_be_later_than_end
-    unless start_at && end_at
-      errors[:date_range] << "Nil columns!"
-      return
-    end
-
-  	if start_at > end_at
-  		errors[:date_range] << "Start date cannot be later than end date."
-  	end
+    demands.size
   end
 
 end
