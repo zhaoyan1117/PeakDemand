@@ -66,13 +66,13 @@ class DemandController < ApplicationController
 
   def get_demand_param
     params["demand"].clone.tap do |d|
-      d["start_at"] = Date.new( d["start_at(1i)"].to_i, 
+      d["start_at"] ||= Date.new( d["start_at(1i)"].to_i, 
                                 d["start_at(2i)"].to_i, 
-                                d["start_at(3i)"].to_i ) unless d["start_at"]
+                                d["start_at(3i)"].to_i )
 
-      d["end_at"] = Date.new( d["end_at(1i)"].to_i, 
+      d["end_at"] ||= Date.new( d["end_at(1i)"].to_i, 
                               d["end_at(2i)"].to_i, 
-                              d["end_at(3i)"].to_i ) unless d["end_at"]
+                              d["end_at(3i)"].to_i )
 
       d["consumer"] = @user
       d["resource"] = @resource
