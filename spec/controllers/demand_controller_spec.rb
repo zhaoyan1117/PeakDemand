@@ -2,28 +2,122 @@ require 'spec_helper'
 
 describe DemandController do
 
-  describe "new" do
-    it "should render new page if user is a consumer"
-
-    it "should redirect_to to resource page with an error message if user is not a consumer"
+  before :each do
+    @resource = FactoryGirl.build :resource
   end
 
-  describe "create" do
-    it "should redirect to resource demand page if save successfully"
+  describe "GET /new" do
+    it "should redirect to login page if there is no user login" do
+      log_out
 
-    it "should redirect to new resource demand page if save failed"
+      get :new, :resource_id => @resource.id
+      response.status.should == 302
+    end
+
+    it "should render new page if user is a consumer" do
+      login_consumer
+      User.any_instance.should_receive(:is_consumer).and_call_original
+      Resource.should_receive(:find).and_return(@resource)
+
+      get :new, :resource_id => @resource.id
+      response.should render_template "demand/new"
+      response.status.should == 200
+    end
+
+    it "should redirect_to to resource page with an error message if user is not a consumer" do
+      login_provider
+      User.any_instance.should_receive(:is_consumer).and_call_original
+      Resource.should_receive(:find).and_return(@resource)
+
+      get :new, :resource_id => @resource.id
+      response.should redirect_to resource_url(@resource)
+      response.status.should == 302
+    end
   end
 
-  describe "update" do
-    it "should redirect to resource demand page if save successfully"
+  describe "POST /create" do
+    before :each do
+      login_consumer
+      @demand_param = FactoryGirl.attributes_for :demand, :consumer => @user, :resource => @resource
+      @demand = FactoryGirl.build :demand, :consumer => @user, :resource => @resource
+    end
 
-    it "should redirect to edit resource demand page if save failed"
+    it "should redirect to resource demand page if save successfully" do
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:new).and_return(@demand)
+
+      post :create, :resource_id => @resource.id, :demand => @demand_param
+      response.should redirect_to resource_demand_url(@resource, @demand)
+      response.status.should == 302
+    end
+
+    it "should redirect to new resource demand page if save failed" do
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:new).and_return(@demand)
+      @demand.stub(:save).and_return(false)
+
+      post :create, :resource_id => @resource.id, :demand => @demand_param
+      flash[:error].should_not be_nil
+      response.should redirect_to new_resource_demand_url(@resource)
+      response.status.should == 302
+    end
   end
 
-  describe "destroy" do
-    it "should call the destroy method of a given resource"
+  describe "GET /edit" do
+    it "should call get_intensities to get demand's intensity options" do
+      login_consumer
+      d = FactoryGirl.build :demand, :consumer => @user, :resource => @resource
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:find).and_return(d)
 
-    it "should redirect to resource page"
+      controller.should_receive(:get_intensities)
+
+      get :edit, :resource_id => @resource.id, :id => d.id
+      response.should render_template "demand/edit" 
+    end
+  end
+
+  describe "PUT /update" do
+    before :each do
+      login_consumer
+      @demand_param = FactoryGirl.attributes_for :demand, :consumer => @user, :resource => @resource, :intensity => "MODERATE"
+      @demand = FactoryGirl.build :demand, :consumer => @user, :resource => @resource
+    end
+    
+    it "should redirect to resource demand page if save successfully" do
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:find).and_return(@demand)
+
+      put :update, :resource_id => @resource.id, :demand => @demand_param, :id => @demand.id
+      response.should redirect_to resource_demand_url(@resource, @demand)
+      response.status.should == 302
+    end
+
+    it "should redirect to edit resource demand page if save failed" do
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:find).and_return(@demand)
+      @demand.stub(:save).and_return(false)
+
+      put :update, :resource_id => @resource.id, :demand => @demand_param, :id => @demand.id
+      response.should redirect_to edit_resource_demand_url(@resource, @demand)
+      response.status.should == 302
+    end
+
+  end
+
+  describe "DELETE /destroy" do
+    it "should call the destroy method of a given resource and redirect to resource page" do
+      login_consumer
+      d = FactoryGirl.build :demand, :consumer => @user, :resource => @resource
+
+      Resource.should_receive(:find).and_return(@resource)
+      Demand.should_receive(:find).and_return(d)
+      d.should_receive(:destroy)
+
+      delete :destroy, :resource_id => @resource.id, :id =>d.id
+      response.should redirect_to resource_url(@resource)
+      response.status.should == 302
+    end
   end
 
 end

@@ -2,6 +2,7 @@
 
 FactoryGirl.define do
   factory :user do
+  	id 1
     name "User"
     email "user@test.com"
     password "peekdemandapp"

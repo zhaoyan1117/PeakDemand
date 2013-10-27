@@ -5,8 +5,8 @@ FactoryGirl.define do
   	id 1
     name "resource"
     description "this is test resource"
-    start_at "2013-10-27"
-    end_at "2013-10-28"
-    provider nil
+    start_at {Date.today}
+    end_at {Date.tomorrow}
+    provider {FactoryGirl.build :user, :is_provider => true}
   end
 end

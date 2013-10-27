@@ -48,14 +48,13 @@ describe ResourceController do
     end
 
     it "should redirect to resource index page if save successfully" do
-      @resource_param[:provider] = @user
-
       post :create, :resource => @resource_param
       response.should redirect_to resource_index_url
       response.status.should == 302
     end
 
     it "should redirect to new resource page if save failed" do
+      @resource_param[:provider] = nil
       controller.should_receive(:get_resource_param).and_return(@resource_param)
 
       post :create, :resource => @resource_param
@@ -68,14 +67,11 @@ describe ResourceController do
   describe "PUT /update" do
     before :each do
       login_provider
-      @resource_param = FactoryGirl.attributes_for :resource
-      @resource_param[:name] = "new_name"
+      @resource_param = FactoryGirl.attributes_for :resource, :name => "new_name"
       @r = FactoryGirl.build :resource, :provider => @user
     end
 
     it "should redirect to resource page if save successfully" do
-      @resource_param[:provider] = @user
-
       Resource.should_receive(:find).and_return(@r)
 
       put :update, :id => @r.id, :resource => @resource_param
@@ -84,6 +80,7 @@ describe ResourceController do
     end
 
     it "should redirect to new resource page if save failed" do
+      @resource_param[:provider] = nil
       Resource.should_receive(:find).and_return(@r)
       controller.should_receive(:get_resource_param).and_return(@resource_param)
 
@@ -98,8 +95,8 @@ describe ResourceController do
       login_provider
       r = FactoryGirl.build :resource, :provider => @user
 
-      r.should_receive(:destroy)
       Resource.should_receive(:find).and_return(r)
+      r.should_receive(:destroy)
 
       delete :destroy, :id => r.id
       response.should redirect_to resource_index_url
