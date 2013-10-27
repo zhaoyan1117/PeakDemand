@@ -3,7 +3,6 @@ class Demand < ActiveRecord::Base
   INTENSITIES = %w(LIGHT MODERATE HEAVY OCCUPY)
 
   attr_accessible :start_at, :end_at, :intensity, :consumer, :resource, :description
-
   belongs_to :consumer, :class_name => 'User', :foreign_key => 'consumer_id'
   belongs_to :resource, :class_name => 'Resource', :foreign_key => 'resource_id'
 
@@ -19,14 +18,24 @@ class Demand < ActiveRecord::Base
   private
 
   def validate_start_cannot_be_later_than_end
+    unless start_at && end_at
+      errors[:date_range] << "Nil columns!" 
+      return
+    end
+      
     if start_at > end_at
-      errors[:base] << "Start date cannot be later than end date."
+      errors[:date_range] << "Start date cannot be later than end date."
     end
   end
 
   def validate_date_range_should_be_in_resource_date_range
+    unless resource && start_at && end_at
+      errors[:resource_date_range] << "Nil columns!" 
+      return
+    end
+
     if start_at < resource.start_at || end_at > resource.end_at
-      errors[:base] << "Validate date range should be in resource date range."
+      errors[:resource_date_range] << "Validate date range should be in resource date range."
     end
   end
 
