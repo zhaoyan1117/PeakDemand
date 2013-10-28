@@ -1,21 +1,25 @@
 <div class="top_banner">
-    <%= image_tag "logo.png", :id => "logo" %>
-    <% if user_signed_in? %>
-        <div class="user_profile">
-            <%= link_to destroy_user_session_path, :method => :delete do %>
-                <div class="logout">Log Out</div>
-            <% end %>
+    <div class="logo">
+        <%= link_to resource_index_url do %>
+            <%= image_tag "logo.png" %>
+        <% end %>
+    </div>
+    
+    <div class="user_profile">
+        <% if user_signed_in? %>
+                <%= link_to destroy_user_session_path, :method => :delete do %>
+                    <div class="logout">Log Out</div>
+                <% end %>
 
-            <%= link_to edit_user_registration_path(@user) do %>
-                <div class="my_account">My Account</div>
-            <% end %>
-        </div>
+                <%= link_to edit_user_registration_path(@user) do %>
+                    <div class="my_account">My Account</div>
+                <% end %>
 
-    <% else %>
+        <% else %>
 
-            <%= link_to new_user_session_url do %>
-                <div class="login">Sign In</div>
-            <% end %>
-
-    <% end %>
+                <%= link_to new_user_session_url do %>
+                    <div class="login">Sign In</div>
+                <% end %>
+        <% end %>
+    </div>
 </div>
