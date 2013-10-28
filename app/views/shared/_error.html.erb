@@ -1,5 +1,7 @@
-<% if flash[:error] %>
-	<% flash[:error].each do |e| %>
-		<h2><font color="red"><%= e %></font></h2>
+<div class="error_msg">
+	<% if flash[:error] %>
+		<% flash[:error].each do |e| %>
+			<h2><font color="red"><%= e %></font></h2>
+		<% end %>
 	<% end %>
-<% end %>
+</div>
