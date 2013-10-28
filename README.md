@@ -5,3 +5,4 @@ Peek Demand App
 [![Coverage Status](https://coveralls.io/repos/zhaoyan1117/PeekDemand/badge.png)](https://coveralls.io/r/zhaoyan1117/PeekDemand)
 
 This is a course project for CS169 Fa2013 in Berkeley.
+http://peekdemand.herokuapp.com/
