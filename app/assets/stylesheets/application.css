@@ -11,3 +11,30 @@
  *= require_self
  *= require_tree .
  */
+
+body {
+	font-family: Arial;
+}
+
+.top_banner {
+	position: absolute;
+	width: 100%;
+	height: 96px;
+	background: #D8D8D8;
+}
+
+.logo {
+	width: 410px;
+	position: relative;
+	
+}
+
+.user_profile {
+
+}
+
+.my_account {}
+
+.logout {}
+
+.login {}
