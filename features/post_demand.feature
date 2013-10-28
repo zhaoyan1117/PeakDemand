@@ -5,7 +5,6 @@ So that I can let the resource providers and other resource consumers know my po
 I want to post my potential demand of a given resource on the app
 
 Scenario: Post a demand to an existing resource as a consumer
-
   Given provider "p1" with email "p1@p1.com" and password "password" has signed up
   Given the following resources posted by "p1@p1.com":
   | name | start_at | end_at   |
@@ -13,7 +12,7 @@ Scenario: Post a demand to an existing resource as a consumer
   When I follow "Log Out"
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up
 
-  When I am on the create resource page for "R1"
+  When I am on the create demand page for "R1"
   When I choose "demand_intensity_moderate"
   Then I press "Submit"
   Then I should see "Demand on R1"

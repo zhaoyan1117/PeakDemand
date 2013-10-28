@@ -1,4 +1,4 @@
-Feature: Add resources to the website
+Feature: add the status of some available resource (sets of clusters) on the app
 
 As a resource provider or an administrator
 So that I can share the information of the current available resource to the resource consumers

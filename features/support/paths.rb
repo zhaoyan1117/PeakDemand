@@ -25,7 +25,7 @@ module NavigationHelpers
     new_user_registration_path
   when /^the create resource page$/
     new_resource_path
-  when /^the create resource page for "(.*)"$/
+  when /^the create demand page for "(.*)"$/
     #print "Resource.find_by_name($1) = "+Resource.find_by_name($1).to_s
     new_resource_demand_path(Resource.find_by_name($1).id)
   when /^the resource detail page of "(.*)"$/
