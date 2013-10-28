@@ -2,9 +2,11 @@
 
 <%= render 'shared/error' %>
 
-<% if @resources.empty? %>
-	<h2> There is no resource currently!</h2>
-<% else %>
+<div class="inner_banner">
+    <%= image_tag "toggle.png", :id => "toggle" %>
+</div>
+
+<div class="dashboard">
 	<h2> This is the resources we have now!</h2>
 	<table>
 		<tr>
@@ -25,8 +27,12 @@
 				<td> <%= link_to "Detail", resource_url(r) %> </td>
 			</tr>
 		<% end %>
-
+		<tr>
+			<td>
+				<%= link_to new_resource_url do %>
+					<div class="create_resource">Create Resource</div>
+				<% end %>
+			</td>
+		</tr>
 	</table>
-<% end %>
-
-<%= link_to "Create Resource", new_resource_url %>
+</div>
