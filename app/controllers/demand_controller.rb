@@ -27,6 +27,9 @@ class DemandController < ApplicationController
       redirect_to new_resource_demand_url(@resource)
     end
 
+  rescue ArgumentError
+    flash[:error] = {:date => "Invalid Date."}
+    redirect_to new_resource_url
   end
 
   def show
