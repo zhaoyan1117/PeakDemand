@@ -15,10 +15,7 @@ class DemandController < ApplicationController
   end
 
   def create
-
-    demand_param = get_demand_param
-
-    d = Demand.new(demand_param)
+    d = Demand.new params["demand"].merge("consumer" => @user, "resource" => @resource)
     
     if d.save
       redirect_to resource_demand_url(@resource, d)
@@ -26,10 +23,6 @@ class DemandController < ApplicationController
       flash[:error] = d.errors.full_messages
       redirect_to new_resource_demand_url(@resource)
     end
-
-  rescue ArgumentError
-    flash[:error] = {:date => "Invalid Date."}
-    redirect_to new_resource_url
   end
 
   def show
@@ -40,9 +33,7 @@ class DemandController < ApplicationController
   end
 
   def update
-    demand_param = get_demand_param
-    
-    @demand.update_attributes demand_param
+    @demand.update_attributes params["demand"].merge("consumer" => @user, "resource" => @resource)
     
     if @demand.save
       redirect_to resource_demand_url(@resource, @demand)
@@ -65,16 +56,6 @@ class DemandController < ApplicationController
 
   def get_resource
     @resource = Resource.find(params[:resource_id])
-  end
-
-  def get_demand_param
-    params["demand"].clone.tap do |d|
-      d["start_at"] ||= create_date d, "start_at"
-      d["end_at"] ||= create_date d, "end_at"
-
-      d["consumer"] = @user
-      d["resource"] = @resource
-    end
   end
 
   def get_intensities

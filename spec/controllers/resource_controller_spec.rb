@@ -54,8 +54,7 @@ describe ResourceController do
     end
 
     it "should redirect to new resource page if save failed" do
-      @resource_param[:provider] = nil
-      controller.should_receive(:get_resource_param).and_return(@resource_param)
+      controller.should_receive(:get_current_user).and_return(nil)
 
       post :create, :resource => @resource_param
       flash[:error].should_not be_nil
@@ -80,9 +79,8 @@ describe ResourceController do
     end
 
     it "should redirect to new resource page if save failed" do
-      @resource_param[:provider] = nil
       Resource.should_receive(:find).and_return(@r)
-      controller.should_receive(:get_resource_param).and_return(@resource_param)
+      controller.should_receive(:get_current_user).and_return(nil)
 
       put :update, :id => @r.id, :resource => @resource_param
       response.should redirect_to edit_resource_url(@r)
