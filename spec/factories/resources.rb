@@ -4,6 +4,7 @@ FactoryGirl.define do
   factory :resource do
   	id 1
     name "resource"
+    short_description "short_description"
     description "this is test resource"
     start_at {Date.today}
     end_at {Date.tomorrow}

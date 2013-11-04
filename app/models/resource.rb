@@ -1,6 +1,6 @@
 class Resource < ActiveRecord::Base
 
-  attr_accessible :name, :description, :start_at, :end_at, :provider
+  attr_accessible :name, :description, :start_at, :end_at, :provider, :short_description
   
   belongs_to :provider, :class_name => 'User', :foreign_key => 'provider_id'
   has_many :demands
