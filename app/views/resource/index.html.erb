@@ -2,37 +2,35 @@
 
 <%= render 'shared/error' %>
 
-<div class="inner_banner">
-    <%= image_tag "toggle.png", :id => "toggle" %>
-</div>
+<div class="content">
+	<div class="inner_banner"><i>Resources list</i></div>
 
-<div class="dashboard">
-	<div class="inner_banner"><h2> This is the resources we have now!</h2></div>
-	<table>
-		<tr>
-			<th>Resource Name</th>
-			<th>Start at</th>
-			<th>End at</th>
-			<th>Created by</th>
-			<th>Number of Demands</th>
-		</tr>
-	</table>
-
+	<div class="dashboard">
 		<% @resources.each do |r| %>
 			<%= link_to resource_url r do %>
 				<div class="each_resource">
-						<div class="r_name r_item"> <%= r.name %> </div>
-						<div class="r_start r_item"> <%= r.start_at %> </div>
-						<div class="r_end r_item"> <%= r.end_at %> </div>
-						<div class="r_provider r_item"> <%= r.provider_name %> </div>
-						<div class="r_num r_item"> <%= r.get_number_of_demands %> </div>
+					<div class="r_bg">
+						<div class="r_name"> <%= r.name %> </div>
+						<div class="r_des"> <%= r.des %> </div>
+					</div>
+
+					<div class="r_sm">
+						<div class="r_item"> <div class="r_item_title">Start</div><%= r.start_at %></div>
+						<div class="r_item"> <div class="r_item_title">End</div><%= r.end_at %></div>
+						<div class="r_item"> <div class="r_item_title">Provider</div><%= r.provider_name %></div>
+						<div class="r_item"> <div class="r_item_title">Demand</div><%= r.get_number_of_demands %></div>
+					</div>
 				</div>
 			<% end %>
 		<% end %>
+			
 
 		<div>
 			<%= link_to new_resource_url do %>
 				<div class="create_resource">New Resource</div>
 			<% end %>
 		</div>
+
+	</div>
+
 </div>
