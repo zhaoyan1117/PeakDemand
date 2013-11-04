@@ -8,9 +8,10 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_self
- *= require_tree .
+
+
  */
+
 
 body {
 	font-family: Arial;
@@ -18,23 +19,30 @@ body {
 	padding: 0;
 	font-size: 16px;
 
-	background-color: rgb(230,230,230);
+	background-color: rgb(222,222,222);
 }
 
 a {text-decoration: none}
 
 .top_banner {
-	position: absolute;
+	top: 0;
 	width: 100%;
-	height: 48px;
-	background-color: #0B61C7;
-	box-shadow: 0px 1px 1px rgb(200,200,200);
+	height: 50px;
+box-shadow: 0px 1px 2px rgba(10,10,10, .5);
+border-bottom: 1px solid rgb(30,30,30);
+
+background-image: -o-linear-gradient(-90deg, #2F7BD5 0%, #0B61C7 100%);
+background-image: -moz-linear-gradient(-90deg, #2F7BD5 0%, #0B61C7 100%);
+background-image: -webkit-linear-gradient(-90deg, #2F7BD5 0%, #0B61C7 100%);
+background-image: -ms-linear-gradient(-90deg, #2F7BD5 0%, #0B61C7 100%);
+background-image: linear-gradient(-180deg, #2F7BD5 0%, #0B61C7 100%);
+
 }
 
 .logo {
+	position: relative;
 	width: 410px;
 	top: 10px;
-	margin-top: 10px;
 	margin-left: 20px;
 	color: white;
 	opacity: .85;
@@ -43,8 +51,10 @@ a {text-decoration: none}
 .user_profile {
 	position: relative;
 	float: right;
-	top: -25px;
+	top: -9px;
 	width: 200px;
+	font-size: .9em;
+	line-height: 1.2em;
 }
 
 .my_account {
@@ -66,85 +76,105 @@ a {text-decoration: none}
 
 .my_account:hover,.logout:hover,.login:hover {opacity: .5;}
 
-
-.dashboard {
-	margin-top: -20px;
-}
-
 .inner_banner {
 	width: 100%;
-	height: 45px;
-	background: rgb(200,200,200);
+	height: 20px;
 }
 
-.dashboard h2 {
-	padding-top: 15px;
-	font-size: 1.1em;
-	color: rgb(120,120,120);
+.content i {
+	position: relative;
+	top:9px;
+	left: 75px;
+	font-size: .9em;
+	color: rgb(155,155,155);
 	text-align: center;
 	font-weight: 100;
+	font-style: normal;
 }
 
-
-table {
-	width:90%;
-	margin-right: auto;
-	margin-left: auto;
-	margin-top: 10px;
-	border-collapse:collapse;
-	margin-bottom: 7px;
-	color: rgb(100,100,100);
+.dashboard {
+	margin-top: 15px;
 }
 
-th {
-	font-weight: lighter;
-	font-size: .9em;
-	width: 20%;
-}
-
-.each_resource, .create_resource{
+.each_resource, .create_resource {
 	background: rgb(250,250,250);
 	padding: 5px;
-	border-radius: 1px;
+	border-radius: 2px;
 	box-shadow: 0px 1px 3px rgba(140,140,140, .6);
-	width: 90%;
+	width: 70%;
+	min-width: 700px;
 	margin-right: auto;
-	margin-left: auto;
+	margin-left: 5%;
 
-	height: 40px;
+	height: 62px;
 
 	margin-bottom: 10px;
 }
 
-.r_item {
-	position: relative;
-	float: left;
-	margin-top: 11px;
-	width: 20%;
-	text-align: center;
-	color: rgb(40,40,40);
+.each_resource:hover {
+	box-shadow: 0px 1px 5px rgba(150,150,150, .75), inset 0px 0px 1px rgb(50,50,50);
+	background-color: rgb(243,243,243);
 }
 
-.each_resource:hover{
-	opacity: .8;
+.each_resource:active {
+	box-shadow: 0px 0px 3px rgba(140,140,140, .6) inset;
+	background: rgb(240,240,240);
+}
+
+.r_bg {
+	height: 100%;
+	width: 57%;
+	float: left;
+	border-radius: 1px;
 }
 
 .r_name {
+	color: rgb(40,40,40);
 	font-weight: bold;
+	font-size: 1.3em;
+	text-indent: 13px;
+	top: 6px;
+	position: relative;
 }
 
-.r_start, .r_end {
-	
+.r_des {
+	color: rgb(120,120,120);
+	text-indent: 13px;
+	top: 15px;
+	position: relative;
+	font-size: .85em;
 }
 
-.r_provider {
+.r_sm {
+	height: 100%;
+	width: 42.5%;
+	float: right;
+	background-color: rgb(243,243,243);
+	border-radius: 2px;
+	box-shadow: inset 0px 0px 3px rgba(100,100,100,.5);
+}
+
+.r_item {
+	width: 25%;
+	float: left;
+	color: rgb(70,70,70);
+	font-size: .85em;
+	text-align: center;
+	height: 100%;
+	line-height:270%;
+}
+
+.r_item_title {
+	color: rgb(180,180,180);
+	font-size: .92em;
+	line-height:225%
 }
 
 .create_resource {
-	background-color: rgb(220,220,220);
+	background-color: rgb(216,216,216);
 	height: 27px;
 	box-shadow: 0px 0px 0px white, 0px 1px 4px rgba(150,150,150, .55) inset;
-	font-size: 1.15em;
+	font-size: 1.08em;
 	color: rgb(130,130,130);
 	text-align: center;
 	padding-top: 11px;
@@ -152,5 +182,13 @@ th {
 
 .create_resource:hover {
 	box-shadow: 0px 1px 4px rgba(150,150,150, .55);
-	background-color: rgb(230,230,230);
+	border: 1px solid rgb(160,160,160);
+	padding-top: 10px;
+	padding-left: 3px;
+}
+
+.create_resource:active {
+	background-color: rgb(210,210,210);
+	box-shadow: inset 0px 1px 4px rgba(50,50,50,.2);
+	color: rgb(100,100,100);
 }
