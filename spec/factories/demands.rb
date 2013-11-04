@@ -6,6 +6,7 @@ FactoryGirl.define do
     start_at {Date.today}
     end_at {Date.tomorrow}
     intensity "LIGHT"
+    short_description "short_description"
     description "this is a test demand"
     consumer {FactoryGirl.build :user, :is_consumer => true}
     resource {FactoryGirl.build :resource}
