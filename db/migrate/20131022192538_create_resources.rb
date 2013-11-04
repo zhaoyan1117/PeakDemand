@@ -6,7 +6,7 @@ class CreateResources < ActiveRecord::Migration
     	t.text :description
 
     	t.date :start_at, :null => false
-    	t.date :end_at, :null => false
+    	t.date :end_at
 
     	t.integer :provider_id, :null => false
 

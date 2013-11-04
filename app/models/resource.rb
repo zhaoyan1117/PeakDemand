@@ -6,7 +6,7 @@ class Resource < ActiveRecord::Base
   has_many :demands
   has_many :consumers, :through => :demands
 
-  validates :name, :provider, :start_at, :end_at, :presence => true
+  validates :name, :provider, :start_at, :presence => true
   include DateRangeValidation
 
   def provider_name

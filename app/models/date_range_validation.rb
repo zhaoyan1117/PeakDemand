@@ -9,13 +9,15 @@ module DateRangeValidation
   private
 
   def validate_start_cannot_be_later_than_end
-    unless start_at && end_at
-      errors[:date_range] << "Nil columns!" 
-      return
-    end
-      
-    if start_at > end_at
-      errors[:date_range] << "Start date cannot be later than end date."
+    if end_at
+      unless start_at
+        errors[:date_range] << "Nil columns!" 
+        return
+      end
+        
+      if start_at > end_at
+        errors[:date_range] << "Start date cannot be later than end date."
+      end
     end
   end
 
