@@ -27,13 +27,6 @@ describe Resource do
     @r.errors.messages.should include(:date_range)
   end
 
-  it "should have an end date" do
-    @r.end_at = nil
-    @r.valid?.should be_false
-    @r.errors.messages.should include(:end_at)
-    @r.errors.messages.should include(:date_range)
-  end
-
   it "should belong to an provider" do
     @r.provider = nil
     @r.valid?.should be_false

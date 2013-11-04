@@ -18,6 +18,8 @@ module DateRangeValidation
       if start_at > end_at
         errors[:date_range] << "Start date cannot be later than end date."
       end
+    elsif self.class == Demand
+      errors[:date_range] << "Nil columns!" 
     end
   end
 
