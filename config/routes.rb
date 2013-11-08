@@ -1,4 +1,4 @@
-PeekDemand::Application.routes.draw do
+PeakDemand::Application.routes.draw do
   
   root :to => 'resource#index'
 

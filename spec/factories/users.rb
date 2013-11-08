@@ -5,8 +5,8 @@ FactoryGirl.define do
   	id 1
     name "User"
     email "user@test.com"
-    password "peekdemandapp"
-    password_confirmation "peekdemandapp"
+    password "peakdemandapp"
+    password_confirmation "peakdemandapp"
     is_provider true
   end
 end

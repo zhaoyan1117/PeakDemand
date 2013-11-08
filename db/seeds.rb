@@ -9,15 +9,15 @@
 # Provider.
 provider = User.create!( :name => "Jeff",
                          :email => "provider@pd.com",
-                         :password => "peekdemand",
-                         :password_confirmation => "peekdemand",
+                         :password => "peakdemand",
+                         :password_confirmation => "peakdemand",
                          :is_provider => true )
 
 # Consumer.
 consumer = User.create!( :name => "Aaron",
                          :email => "consumer@pd.com",
-                         :password => "peekdemand",
-                         :password_confirmation => "peekdemand",
+                         :password => "peakdemand",
+                         :password_confirmation => "peakdemand",
                          :is_consumer => true )
 
 # Resource.

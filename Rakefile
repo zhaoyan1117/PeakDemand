@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-PeekDemand::Application.load_tasks
+PeakDemand::Application.load_tasks
