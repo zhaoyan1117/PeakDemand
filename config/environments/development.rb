@@ -34,4 +34,10 @@ PeakDemand::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # Add development google account. TODO: encryption?
+  GCal4Ruby.configure do |config|
+    config.username = 'peakdemand.saas@gmail.com' 
+    config.password = 'PeakDemand.CS169'
+  end
 end
