@@ -13,7 +13,8 @@ class Demand < ActiveRecord::Base
 
   after_commit :update_event
   after_create :create_event
-
+  after_destroy :delete_event
+  
   def consumer_name
   	consumer.name
   end
@@ -61,6 +62,12 @@ class Demand < ActiveRecord::Base
     event.end_time = end_at.to_s
     event.title = short_description
     event.save
+  end
+
+  def delete_event
+    service = get_gcal_service
+    event = GCal4Ruby::Event.find(service, {:id => event_id})
+    event.delete
   end
 
   def get_gcal_service
