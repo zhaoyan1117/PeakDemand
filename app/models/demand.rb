@@ -28,4 +28,7 @@ class Demand < ActiveRecord::Base
     end
   end
 
+  def update_calendar
+  end
+
 end

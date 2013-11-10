@@ -19,6 +19,9 @@
 <h3>Creator</h3>
 <p> <%= @resource.provider_name %> </p>
 
+<h3>Calendar</h3>
+<%= @calendar_url.html_safe %>
+
 <h3>Demands on this Resource</h3>
 <% if @resource.demands.empty? %>
 	<p> There is no demand on this resource currently!</p>

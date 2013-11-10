@@ -27,6 +27,7 @@ class ResourceController < ApplicationController
   end
 
   def show
+    @calendar_url = @resource.get_url
   end
 
   def edit
