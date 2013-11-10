@@ -11,6 +11,9 @@ class Demand < ActiveRecord::Base
   validate :validate_date_range_should_be_in_resource_date_range
   include DateRangeValidation
 
+  after_commit :update_event
+  after_create :create_event
+
   def consumer_name
   	consumer.name
   end
@@ -28,7 +31,42 @@ class Demand < ActiveRecord::Base
     end
   end
 
-  def update_calendar
+  def create_event
+    service = get_gcal_service
+    cal_id = resource.get_calendar_id(intensity)
+
+    cal = GCal4Ruby::Calendar.find(service, {:id => cal_id})
+
+    event = GCal4Ruby::Event.new(service)
+    event.calendar = cal
+    event.all_day = true
+    event.start_time = start_at.to_s
+    event.end_time = end_at.to_s
+    event.title = short_description
+    event.save
+    
+    self.event_id = event.id and save!
+  end
+
+  def update_event
+    service = get_gcal_service
+    cal_id = resource.get_calendar_id(intensity)
+
+    cal = GCal4Ruby::Calendar.find(service, {:id => cal_id})
+
+    event = GCal4Ruby::Event.find(service, {:id => event_id})
+    event.calendar = cal
+    event.all_day = true
+    event.start_time = start_at.to_s
+    event.end_time = end_at.to_s
+    event.title = short_description
+    event.save
+  end
+
+  def get_gcal_service
+    service = GCal4Ruby::Service.new
+    service.authenticate
+    service
   end
 
 end

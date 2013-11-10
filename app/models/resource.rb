@@ -45,6 +45,19 @@ class Resource < ActiveRecord::Base
     GCal4Ruby::Service.new.to_iframe cals, params, colors
   end
 
+  def get_calendar_id type
+    case type
+    when 'LIGHT'
+      light_cal_id
+    when 'MODERATE'
+      moderate_cal_id
+    when 'HEAVY'
+      heavy_cal_id
+    when 'OCCUPY'
+      occupy_cal_id
+    end
+  end
+
   private
 
   def create_calendar
