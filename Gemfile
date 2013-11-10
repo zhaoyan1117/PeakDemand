@@ -41,7 +41,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
-gem 'gcal4ruby', :git => 'git@github.com:zhaoyan1117/GCal4Ruby.git'
+gem 'gcal4ruby', :github => 'zhaoyan1117/GCal4Ruby'
 
 # Use unicorn as the web server
 # gem 'unicorn'
