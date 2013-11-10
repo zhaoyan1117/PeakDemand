@@ -23,7 +23,7 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'simplecov', :require => false
   gem 'coveralls', :require => false
-  gem "fakeweb", "~> 1.3.0", :require => false
+  gem "webmock", "~> 1.15.2", :require => false
 end
 
 group :production do
@@ -41,7 +41,9 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
-gem 'gcal4ruby', :github => 'https://github.com/zhaoyan1117/GCal4Ruby.git'
+
+gem 'gcal4ruby', :path => '/home/saasbook/Project/gems/GCal4Ruby'
+#gem 'gcal4ruby', :github => 'zhaoyan1117/GCal4Ruby'
 
 # Use unicorn as the web server
 # gem 'unicorn'
