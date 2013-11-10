@@ -33,14 +33,11 @@ class DemandController < ApplicationController
   end
 
   def update
-    @demand.update_attributes params["demand"].merge("consumer" => @user, "resource" => @resource)
-    
-    if @demand.save
+    if @demand.update_attributes params["demand"].merge("consumer" => @user, "resource" => @resource)
       redirect_to resource_demand_url(@resource, @demand)
     else
       redirect_to edit_resource_demand_url(@resource, @demand)
     end
-
   end
 
   def destroy

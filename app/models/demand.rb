@@ -11,7 +11,7 @@ class Demand < ActiveRecord::Base
   validate :validate_date_range_should_be_in_resource_date_range
   include DateRangeValidation
 
-  after_commit :update_event
+  after_update :update_event
   after_create :create_event
   after_destroy :delete_event
   

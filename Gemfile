@@ -23,6 +23,7 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'simplecov', :require => false
   gem 'coveralls', :require => false
+  gem "fakeweb", "~> 1.3.0", :require => false
 end
 
 group :production do

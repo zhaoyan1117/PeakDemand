@@ -34,14 +34,11 @@ class ResourceController < ApplicationController
   end
 
   def update
-    @resource.update_attributes params["resource"].merge("provider" => @user)
-    
-    if @resource.save
+    if @resource.update_attributes params["resource"].merge("provider" => @user)
       redirect_to resource_url(@resource)
     else
       redirect_to edit_resource_url(@resource)
     end
-
   end
 
   def destroy

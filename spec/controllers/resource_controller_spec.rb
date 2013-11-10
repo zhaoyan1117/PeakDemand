@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 describe ResourceController do
+  
   describe "GET /index" do
     it "should call Resource's all method to retrieve all resources" do
       Resource.should_receive :all
@@ -48,6 +49,8 @@ describe ResourceController do
     end
 
     it "should redirect to resource index page if save successfully" do
+      # Should create calendars after successful creation.
+      Resource.any_instance.should_receive(:create_calendar)
       post :create, :resource => @resource_param
       response.should redirect_to resource_index_url
       response.status.should == 302
@@ -72,6 +75,7 @@ describe ResourceController do
 
     it "should redirect to resource page if save successfully" do
       Resource.should_receive(:find).and_return(@r)
+      @r.should_receive(:update_attributes).and_return(true)
 
       put :update, :id => @r.id, :resource => @resource_param
       response.should redirect_to resource_url(@r)

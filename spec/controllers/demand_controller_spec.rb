@@ -45,6 +45,8 @@ describe DemandController do
     it "should redirect to resource demand page if save successfully" do
       Resource.should_receive(:find).and_return(@resource)
       Demand.should_receive(:new).and_return(@demand)
+      @demand.should_receive(:create_event)
+      @resource.stub(:create_calendar)
 
       post :create, :resource_id => @resource.id, :demand => @demand_param
       response.should redirect_to resource_demand_url(@resource, @demand)
@@ -87,8 +89,14 @@ describe DemandController do
     it "should redirect to resource demand page if save successfully" do
       Resource.should_receive(:find).and_return(@resource)
       Demand.should_receive(:find).and_return(@demand)
+      @demand.should_receive(:update_event)
+      
+      @demand.stub(:create_event)      
+      @resource.stub(:create_calendar)
 
+      @demand.save
       put :update, :resource_id => @resource.id, :demand => @demand_param, :id => @demand.id
+
       response.should redirect_to resource_demand_url(@resource, @demand)
       response.status.should == 302
     end
@@ -112,7 +120,8 @@ describe DemandController do
 
       Resource.should_receive(:find).and_return(@resource)
       Demand.should_receive(:find).and_return(d)
-      d.should_receive(:destroy)
+      d.should_receive(:destroy).and_call_original
+      d.should_receive(:delete_event)
 
       delete :destroy, :resource_id => @resource.id, :id =>d.id
       response.should redirect_to resource_url(@resource)

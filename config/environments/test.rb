@@ -34,4 +34,10 @@ PeakDemand::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+
+  GCal4Ruby.configure do |config|
+    config.username = 'peakdemand.saas@gmail.com' 
+    config.password = 'PeakDemand.CS169'
+  end
+
 end
