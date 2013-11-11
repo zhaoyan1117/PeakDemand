@@ -20,6 +20,7 @@ consumer = User.create!( :name => "Aaron",
                          :password_confirmation => "peakdemand",
                          :is_consumer => true )
 
+=begin
 # Resource.
 cluster = Resource.create!( :name => "Cluster1",
                             :short_description => "For scientific computing",
@@ -56,3 +57,4 @@ Demand.create!( :short_description => "Routing work",
                 :consumer => consumer,
                 :start_at => Date.today,
                 :end_at => Date.today )
+=end
