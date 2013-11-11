@@ -11,10 +11,10 @@ class Demand < ActiveRecord::Base
   validate :validate_date_range_should_be_in_resource_date_range
   include DateRangeValidation
 
-  after_update :update_event
   after_create :create_event
+  after_update :update_event, :unless => :save_in_create_call_back?
   after_destroy :delete_event
-  
+
   def consumer_name
   	consumer.name
   end
@@ -37,9 +37,14 @@ class Demand < ActiveRecord::Base
     event = GCal4Ruby::Event.new(service)
     modify_event event, service
 
-    self.event_id = event.id and save!
+    @skip_update_callback = true
+    self.event_id = event.id
   end
 
+  def save_in_create_call_back?
+    @skip_update_callback
+  end
+  
   def update_event
     service = get_gcal_service
     event = GCal4Ruby::Event.find(service, {:id => event_id})

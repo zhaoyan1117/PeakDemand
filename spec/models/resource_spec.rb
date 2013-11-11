@@ -57,4 +57,42 @@ describe Resource do
 
   end
 
+  context "google calendar integration" do
+    
+    describe "get_calendar_id" do
+
+      it "should return the calendar if for given calendar type" do
+        @r.light_cal_id = 'light_cal_id@google'
+        @r.get_calendar_id('light').should == 'light_cal_id@google'
+      end
+
+    end
+
+    describe "set_calendar_id" do
+
+      it "should set the calendar if for given calendar type" do
+        @r.set_calendar_id('light', 'light_cal_id@google')
+        @r.light_cal_id.should == 'light_cal_id@google'
+      end
+
+    end
+
+    describe "create_calendar" do
+
+      it "should create four calendars with one for each demand type for this resource" do
+        number_of_cals = Demand::INTENSITIES.size
+
+        mock_cal = double(GCal4Ruby::Calendar)
+        GCal4Ruby::Service.any_instance.should_receive(:authenticate)
+        GCal4Ruby::Calendar.should_receive(:new).exactly(number_of_cals).times.and_return(mock_cal)
+        mock_cal.should_receive(:id).exactly(number_of_cals).times
+        mock_cal.should_receive(:save).exactly(number_of_cals).times
+        @r.should_receive(:set_calendar_id).exactly(number_of_cals).times
+
+        @r.send(:create_calendar)
+      end
+    end
+    
+  end
+
 end
