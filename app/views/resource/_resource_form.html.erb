@@ -1,4 +1,5 @@
 <%= form_for :resource, :method => method, :url => url do |f|  %>
+
 	<%= f.label :name %><br>
 	<%= f.text_field :name %><br>
 
@@ -15,4 +16,5 @@
 	<input id="resource_end_at" name="resource[end_at]" type="date" value=<%=Date.today%>><br>
 
 	<%= submit_tag("Submit") %>
+
 <% end %>

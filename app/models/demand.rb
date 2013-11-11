@@ -34,34 +34,16 @@ class Demand < ActiveRecord::Base
 
   def create_event
     service = get_gcal_service
-    cal_id = resource.get_calendar_id(intensity)
-
-    cal = GCal4Ruby::Calendar.find(service, {:id => cal_id})
-
     event = GCal4Ruby::Event.new(service)
-    event.calendar = cal
-    event.all_day = true
-    event.start_time = start_at.to_s
-    event.end_time = end_at.to_s
-    event.title = short_description
-    event.save
-    
+    modify_event event, service
+
     self.event_id = event.id and save!
   end
 
   def update_event
     service = get_gcal_service
-    cal_id = resource.get_calendar_id(intensity)
-
-    cal = GCal4Ruby::Calendar.find(service, {:id => cal_id})
-
     event = GCal4Ruby::Event.find(service, {:id => event_id})
-    event.calendar = cal
-    event.all_day = true
-    event.start_time = start_at.to_s
-    event.end_time = end_at.to_s
-    event.title = short_description
-    event.save
+    modify_event event, service
   end
 
   def delete_event
@@ -74,6 +56,17 @@ class Demand < ActiveRecord::Base
     service = GCal4Ruby::Service.new
     service.authenticate
     service
+  end
+
+  def modify_event event, service
+    cal_id = resource.get_calendar_id(intensity)
+    cal = GCal4Ruby::Calendar.find(service, {:id => cal_id})
+    event.calendar = cal
+    event.all_day = true
+    event.start_time = start_at.to_s
+    event.end_time = end_at.to_s
+    event.title = short_description
+    event.save
   end
 
 end

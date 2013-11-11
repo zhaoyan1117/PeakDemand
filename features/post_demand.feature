@@ -14,7 +14,7 @@ Scenario: Post a demand to an existing resource as a consumer
 
   When I am on the create demand page for "R1"
   When I choose "demand_intensity_moderate"
-  Then I press "Submit"
+  Then I press "Submit" to create demand
   Then I should see "Demand on R1"
   When I follow "Go Back"
   Then I should see "c1"
