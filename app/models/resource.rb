@@ -46,16 +46,11 @@ class Resource < ActiveRecord::Base
   end
 
   def get_calendar_id type
-    case type
-    when 'LIGHT'
-      light_cal_id
-    when 'MODERATE'
-      moderate_cal_id
-    when 'HEAVY'
-      heavy_cal_id
-    when 'OCCUPY'
-      occupy_cal_id
-    end
+    send("#{type.downcase}_cal_id".to_sym)
+  end
+
+  def set_calendar_id type, value
+    send("#{type.downcase}_cal_id=".to_sym, value)
   end
 
   private
@@ -63,21 +58,11 @@ class Resource < ActiveRecord::Base
   def create_calendar
     service = get_gcal_service
 
-    light_calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_light", :public => true)
-    light_calendar.save
-    self.light_cal_id = light_calendar.id and save!
-
-    moderate_calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_moderate", :public => true)
-    moderate_calendar.save
-    self.moderate_cal_id = moderate_calendar.id and save!
-
-    heavy_calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_heavy", :public => true)
-    heavy_calendar.save
-    self.heavy_cal_id = heavy_calendar.id and save!
-
-    occupy_calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_occupy", :public => true)
-    occupy_calendar.save
-    self.occupy_cal_id = occupy_calendar.id and save!
+    Demand::INTENSITIES.each do |i|
+      calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_#{i}", :public => true)
+      calendar.save
+      set_calendar_id(i, calendar.id) and save!
+    end
   end
 
   def get_gcal_service
