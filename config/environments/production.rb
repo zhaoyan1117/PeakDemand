@@ -66,7 +66,7 @@ PeakDemand::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   GCal4Ruby.configure do |config|
-    config.username = 'peakdemand.saas@gmail.com' 
+    config.username = 'peakdemand.saas.production@gmail.com' 
     config.password = 'PeakDemand.CS169'
   end
 
