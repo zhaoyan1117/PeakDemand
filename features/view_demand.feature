@@ -13,7 +13,7 @@ Scenario: View the number of demands from the resource index page
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up
   When I am on the create demand page for "R1"
   When I choose "demand_intensity_moderate"
-  Then I press "Submit"
+  Then I press "Submit" to create demand
   When I go to the home page
   Then I should see "R1"
   Then I should see "1"
@@ -27,7 +27,7 @@ Scenario: View the number of demands on the detail page of resource
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up
   When I am on the create demand page for "R1"
   When I choose "demand_intensity_moderate"
-  Then I press "Submit"
+  Then I press "Submit" to create demand
   When I go to the resource detail page of "R1"
   Then I should see "c1"
   And I should see "MODERATE"
