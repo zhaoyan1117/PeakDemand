@@ -9,7 +9,7 @@ class Resource < ActiveRecord::Base
   validates :name, :provider, :start_at, :presence => true
   include DateRangeValidation
 
-  after_create :create_calendar
+  before_create :create_calendar
 
   def provider_name
     provider.name
@@ -20,15 +20,6 @@ class Resource < ActiveRecord::Base
   end
 
   def get_url
-    cals = [occupy_cal_id, heavy_cal_id, moderate_cal_id, light_cal_id]
-
-    colors = {
-      occupy_cal_id => '#A32929',
-      heavy_cal_id => '#7A367A',
-      moderate_cal_id => '#AB8B00',
-      light_cal_id => '#528800'
-    }
-
     start = start_at.strftime '%Y%m%d'
     done = end_at.strftime '%Y%m%d'
     params = {
@@ -42,27 +33,16 @@ class Resource < ActiveRecord::Base
       ctz: 'America/Los_Angeles'
     }
     
-    GCal4Ruby::Service.new.to_iframe cals, params, colors
-  end
-
-  def get_calendar_id type
-    send("#{type.downcase}_cal_id".to_sym)
-  end
-
-  def set_calendar_id type, value
-    send("#{type.downcase}_cal_id=".to_sym, value)
+    GCal4Ruby::Calendar.to_iframe self.cal_id, params
   end
 
   private
 
   def create_calendar
     service = get_gcal_service
-
-    Demand::INTENSITIES.each do |i|
-      calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}_#{i}", :public => true)
-      calendar.save
-      set_calendar_id(i, calendar.id) and save!
-    end
+    calendar = GCal4Ruby::Calendar.new(service, :title => "#{name}", :public => true)
+    calendar.save
+    self.cal_id = calendar.id
   end
 
   def get_gcal_service

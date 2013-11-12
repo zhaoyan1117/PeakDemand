@@ -10,6 +10,7 @@ describe Demand do
     @resource.stub(:end_at).and_return(Date.tomorrow.tomorrow)
 
     @d = Demand.new(
+        :short_description => "test demand",
         :start_at => Date.today,
         :end_at => Date.tomorrow,
         :intensity => "LIGHT",
@@ -85,13 +86,12 @@ describe Demand do
 
     describe "modify_event" do
       it "should update the given event with the specification of this demand" do
-        @resource.should_receive(:get_calendar_id).with(@d.intensity)
         GCal4Ruby::Calendar.should_receive(:find).and_return(@mock_cal)
         @mock_event.should_receive(:calendar=).with(@mock_cal)
         @mock_event.should_receive(:all_day=).with(true)
         @mock_event.should_receive(:start_time=).with(@d.start_at.to_s)
         @mock_event.should_receive(:end_time=).with(@d.end_at.to_s)
-        @mock_event.should_receive(:title=).with(@d.short_description)
+        @mock_event.should_receive(:title=).with("[#{@d.intensity}] #{@d.short_description}")
         @mock_event.should_receive(:save)
 
         @d.send(:modify_event, @mock_event, @mock_service)
