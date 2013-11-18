@@ -19,6 +19,10 @@ class Resource < ActiveRecord::Base
     demands.size
   end
 
+  def get_xml_feed
+    GCal4Ruby::Calendar.get_xml_feed(cal_id)
+  end
+
   def get_url
     start = start_at.strftime '%Y%m%d'
     done = end_at.strftime '%Y%m%d'

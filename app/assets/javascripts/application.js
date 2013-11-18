@@ -12,4 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+
+//= require fullcalendar
+//= require gcal
 //= require_tree .
