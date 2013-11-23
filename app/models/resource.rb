@@ -23,6 +23,10 @@ class Resource < ActiveRecord::Base
     GCal4Ruby::Calendar.get_xml_feed(cal_id)
   end
 
+  def get_cgi_calendar_id
+    CGI.unescape(cal_id) if cal_id
+  end
+
   def get_url
     start = start_at.strftime '%Y%m%d'
     done = end_at.strftime '%Y%m%d'
