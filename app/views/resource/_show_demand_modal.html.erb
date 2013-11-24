@@ -16,12 +16,21 @@
         <div class="demand_description"></div>
 
         <br>
-        <%= form_for :mail, :method => :post, :url => "/mail/send", :html => {:class => 'msg_form'} do |f|  %>
-            <%= f.label :To %>
-            <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email' %><br/>
-            <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
-          <%= submit_tag "Send", :class => 'send_button' %>
+    
+        <% if user %>
+          <%= form_for :mail, :method => :post, :url => "/mail/send", :html => {:class => 'msg_form'} do |f|  %>
+              <%= f.label :To %>
+              <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email' %><br/>
+              <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
+            <%= submit_tag "Send", :class => 'send_button' %>
+          <% end %>
+    
+        <% else %>
+          <div class="login_in_demand_modal">
+            Login to email the consumer
+          </div>
         <% end %>
+
       </div>
 
     </div><!-- /.modal-content -->

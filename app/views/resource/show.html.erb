@@ -13,6 +13,9 @@
                 :calendar_xml_feed => @calendar_xml_feed 
            } %>
 
-<%= render :partial => 'show_demand_modal' %>
+<%= render :partial => 'show_demand_modal',
+		   :locals => {
+		   		:user => @user
+		   } %>
 
 <%= render :partial => 'new_demand_modal' %>
