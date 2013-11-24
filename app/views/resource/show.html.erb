@@ -35,36 +35,67 @@ $(document).ready(function() {
 
 <h3>Demands on this Resource</h3>
 <% if @resource.demands.empty? %>
-	<p> There is no demand on this resource currently!</p>
+    <p> There is no demand on this resource currently!</p>
 <% else %>
-	<table>
-		<tr>
-			<th>Demanded by</th>
-			<th>Intensity</th>
-			<th>Start at</th>
-			<th>End at</th>
-		</tr>
+    <table>
+        <tr>
+            <th>Demanded by</th>
+            <th>Intensity</th>
+            <th>Start at</th>
+            <th>End at</th>
+        </tr>
 
-		<% @resource.demands.each do |d| %>
-			<tr>
-				<td> <%= d.consumer_name %> </td>
-				<td> <%= d.intensity %> </td>
-				<td> <%= d.start_at %> </td>
-				<td> <%= d.end_at %> </td>
-				<td> <%= link_to "Detail", resource_demand_url(@resource, d) %> </td>
-			</tr>
-		<% end %>
+        <% @resource.demands.each do |d| %>
+            <tr>
+                <td> <%= d.consumer_name %> </td>
+                <td> <%= d.intensity %> </td>
+                <td> <%= d.start_at %> </td>
+                <td> <%= d.end_at %> </td>
+                <td> 
+                    <%= content_tag "div", id: "show_demand", data: {target: "#myModal", toggle: "modal", id: 1, url: resource_demand_url(@resource, d)} do %>
+                        detail
+                    <% end %>
+                </td>
+            </tr>
+        <% end %>
 
-	</table>
+    </table>
 <% end %>
 
 <%= link_to "Create Demand", new_resource_demand_url(@resource) %>
 <br>
 
 <% if @user && @user == @resource.provider %>
-	<%= link_to "Edit Resource", edit_resource_url(@resource) %>
-	<%= link_to "Delete Resource", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
+    <%= link_to "Edit Resource", edit_resource_url(@resource) %>
+    <%= link_to "Delete Resource", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
 <% end %>
 
 <br>
 <%= link_to "Go Back", resource_index_url %>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      
+      <div class="modal-body">
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    <%= render :partial => 'show_demand.js',
+               :locals => { :resource_id => @resource.id } %>
+</script>
+
+
