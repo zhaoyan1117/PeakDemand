@@ -1,6 +1,6 @@
 <%= form_for :mail, :method => :post, :url => "/mail/send" do |f|  %>
 	<%= f.label :To %>:
-  	<%= f.text_field :to %><br />
+  	<%= f.text_field :to, readonly: true %><br />
   	<%= f.label :Subject %>:
   	<%= f.text_field :subject %><br />
   	<%= f.label :Body %>:

@@ -15,5 +15,6 @@
 //= require twitter/bootstrap
 
 //= require fullcalendar
+//= require jquery.autosize.min
 //= require gcal
 //= require_tree .

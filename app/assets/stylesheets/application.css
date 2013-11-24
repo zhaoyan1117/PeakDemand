@@ -250,7 +250,6 @@ a {text-decoration: none}
 .left_screen{
 	position: relative;
 	float: left;
-	height: 510px;
 	background-color: white;
 	padding: 1px 20px 15px 20px;
 	box-shadow: 0px 2px 3px rgb(200,200,200);
@@ -260,7 +259,6 @@ a {text-decoration: none}
 	position: relative;
 	float: right;
 	width: 410px;
-	height: 510px;
 	background-color: white;
 	padding: 1px 20px 15px 20px;
 	box-shadow: 0px 2px 3px rgb(200,200,200);
@@ -344,9 +342,89 @@ a {text-decoration: none}
 
 .each_demand_intensity {
 	background-color: rgb(160,160,160);
-	padding: 6px;
+	padding: 2px;
 	margin-left: 7px;
 	margin-right: 7px;
 	border-radius: 4px;
 	color: white;
+	display:inline-block;
+	width: 70px;
+	font-size: .8em;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*model popup*/
+.close {
+	position: relative;
+	top: -4px;
+}
+
+.demand_intensity {
+	background-color: rgb(160,160,160);
+	padding: 2px;
+	margin-left: 7px;
+	margin-right: 7px;
+	border-radius: 4px;
+	color: white;
+	display:inline-block;
+	width: 70px;
+	font-size: .8em;
+	text-align: center;
+}
+
+
+.demand_short_description {
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.demand_consumer_name {
+	position: relative;
+	float: right;
+	right: 15px;
+	color: #4183c4;
+}
+
+.demand_start_at,.demand_end_at {
+	font-weight: bold;
+	color: rgb(160,160,160);
+}
+
+.demand_description {
+	margin-top: 15px;
+	font-size: .94em;
+}
+
+.msg_form {
+	margin: 0px;
+}
+.demand_consumer_msg {
+	width: 97.5%;
+	height: 20px;
+	max-width: 97.5%;
+}
+
+.send_button {
+	float: right;
 }
