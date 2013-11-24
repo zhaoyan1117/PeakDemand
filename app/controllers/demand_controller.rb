@@ -21,7 +21,7 @@ class DemandController < ApplicationController
       flash[:error] = d.errors.full_messages
     end
     
-    redirect_to new_resource_demand_url(@resource)
+    redirect_to resource_url(@resource)
   end
 
   def show

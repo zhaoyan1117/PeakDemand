@@ -1,0 +1,38 @@
+<div class="bottom_screen">
+    <div class="left_screen">
+        <h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= cgi_cal_id %>">Copy</span></h3>
+
+        <div id='calendar'></div>
+
+
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    events: $.fullCalendar.gcalFeed(
+                        "<%= calendar_xml_feed %>"
+                    )
+                });
+            });
+        </script>
+    </div>
+
+    <div class="right_screen">
+        <h3 class="detail_rsrc_sec">Demand List</h3>
+
+        <% if resource.demands.empty? %>
+            <p> There is no demand on this resource currently!</p>
+            <%= link_to "Create Demand", new_resource_demand_url(resource) %>
+
+        <% else %>
+            <div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
+
+            <% resource.demands.each do |d| %>
+                <%= content_tag "div", :class => "each_demand", :data => {target: "#myModal", toggle: "modal", id: d.id, url: resource_demand_url(resource, d)} do %>
+                    <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
+                    <span class="each_demand_content"><span class="each_demand_intensity <%= d.intensity %>_color"><%= d.intensity %></span></span>
+                    <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
+                <% end %>
+            <% end %>
+        <% end %>
+    </div>
+</div>
