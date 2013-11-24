@@ -59,21 +59,13 @@
 				<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
 
 			<% else %>
-
-				<table>
-					<tr class="demands_list_title">
-						<th>Consumer</th>
-						<th>Intensity</th>
-						<th>Duration</th>
-					</tr>
-				</table>
-				<div class="each_demand"><%= link_to "Add a Demand", new_resource_demand_url(@resource) %></div>
+				<div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
 
 				<% @resource.demands.each do |d| %>
                     <%= content_tag "div", :class => "each_demand", :id => "show_demand", :data => {target: "#myModal", toggle: "modal", id: 1, url: resource_demand_url(@resource, d)} do %>
-                        <span class="each_demand_content"><%= d.consumer_name %></span>
-                        <span class="each_demand_content"><%= d.intensity %></span>
-                        <span class="each_demand_content"><%= d.start_at %> - <%= d.end_at %></span>
+                        <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
+                        <span class="each_demand_content"><span class="each_demand_intensity"><%= d.intensity %></span></span>
+                        <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
                     <% end %>
 				<% end %>
 			<% end %>
