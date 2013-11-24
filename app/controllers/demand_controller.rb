@@ -26,6 +26,7 @@ class DemandController < ApplicationController
   end
 
   def show
+    render :json => @demand
   end
 
   def edit

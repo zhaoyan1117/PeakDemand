@@ -1,70 +1,108 @@
 <%= render 'shared/user_header' %>
 
-<%= render 'shared/error' %>
+<div class="screen">
 
-<h2> <%= @resource.name %> </h2>
+	<div>
+		<h1 id="detail_rsrc_title"> <%= @resource.name %> </h1>
 
-<h3>Description</h3>
-<p> <%= @resource.description %> </p>
-<p> <%= @cgi_cal_id %> </p>
-<br>
-
-<h3>Availabe at</h3>
-<p><%= @resource.start_at %></p>
-<br>
-
-<h3>End at</h3>
-<p> <%= @resource.end_at %> </p>
-<br>
-
-<h3>Creator</h3>
-<p> <%= @resource.provider_name %> </p>
-
-<h3>Calendar</h3>
-<script type='text/javascript'>
-$(document).ready(function() {
-    $('#calendar').fullCalendar({
-        events: $.fullCalendar.gcalFeed(
-            "<%= @calendar_xml_feed %>"
-        )
-    });
-});
-</script>
-<div id='calendar'></div>
-
-
-<h3>Demands on this Resource</h3>
-<% if @resource.demands.empty? %>
-	<p> There is no demand on this resource currently!</p>
-<% else %>
-	<table>
-		<tr>
-			<th>Demanded by</th>
-			<th>Intensity</th>
-			<th>Start at</th>
-			<th>End at</th>
-		</tr>
-
-		<% @resource.demands.each do |d| %>
-			<tr>
-				<td> <%= d.consumer_name %> </td>
-				<td> <%= d.intensity %> </td>
-				<td> <%= d.start_at %> </td>
-				<td> <%= d.end_at %> </td>
-				<td> <%= link_to "Detail", resource_demand_url(@resource, d) %> </td>
-			</tr>
+		<% if @user && @user == @resource.provider %>
+		<span>
+			<%= link_to "Edit", edit_resource_url(@resource) %>
+			<%= link_to "Delete", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
+		</span>
 		<% end %>
 
-	</table>
-<% end %>
+		<p><%= @resource.short_description %>. Created by <%= @resource.provider_name %></p>
+	</div>
 
-<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
-<br>
+	<div>
+		<h3 class="detail_rsrc_sec">Description</h3>
+		<p> <%= @resource.description %> </p>
+		<p>  </p>
+	</div>
 
-<% if @user && @user == @resource.provider %>
-	<%= link_to "Edit Resource", edit_resource_url(@resource) %>
-	<%= link_to "Delete Resource", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
-<% end %>
+	<div class="detail_rsrc_avail">
+		<div class="detail_availablity">
+			<h3 class="detail_rsrc_sec">Available from</h3>
+			<p><%= @resource.start_at %></p>
+		</div>
 
-<br>
-<%= link_to "Go Back", resource_index_url %>
+		<div class="detail_availablity detail_clear">
+			<h3 class="detail_rsrc_sec">End in</h3>
+			<p> <%= @resource.end_at %> </p>
+		</div>
+	</div>
+
+	<div class="detail_demands">
+		<div class="demands_calendar">
+			<h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= @cgi_cal_id %>">Copy</span></h3>
+
+			<div id='calendar'></div>
+
+
+							<script type='text/javascript'>
+								$(document).ready(function() {
+								    $('#calendar').fullCalendar({
+								        events: $.fullCalendar.gcalFeed(
+								            "<%= @calendar_xml_feed %>"
+								        )
+								    });
+								});
+							</script>
+		</div>
+
+		<div class="demands_list">
+			<h3 class="detail_rsrc_sec">Demand List</h3>
+
+			<% if @resource.demands.empty? %>
+				<p> There is no demand on this resource currently!</p>
+				<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
+
+			<% else %>
+
+				<table>
+					<tr class="demands_list_title">
+						<th>Consumer</th>
+						<th>Intensity</th>
+						<th>Duration</th>
+					</tr>
+				</table>
+				<div class="each_demand"><%= link_to "Add a Demand", new_resource_demand_url(@resource) %></div>
+
+				<% @resource.demands.each do |d| %>
+                    <%= content_tag "div", :class => "each_demand", :id => "show_demand", :data => {target: "#myModal", toggle: "modal", id: 1, url: resource_demand_url(@resource, d)} do %>
+                        <span class="each_demand_content"><%= d.consumer_name %></span>
+                        <span class="each_demand_content"><%= d.intensity %></span>
+                        <span class="each_demand_content"><%= d.start_at %> - <%= d.end_at %></span>
+                    <% end %>
+				<% end %>
+			<% end %>
+		</div>
+    </div>	
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      
+      <div class="modal-body">
+      </div>
+      
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script type="text/javascript">
+    <%= render :partial => 'show_demand.js',
+               :locals => { :resource_id => @resource.id } %>
+</script>
