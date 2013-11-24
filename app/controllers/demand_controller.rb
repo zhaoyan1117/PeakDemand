@@ -26,7 +26,7 @@ class DemandController < ApplicationController
   end
 
   def show
-    render :json => @demand
+    render :json => @demand, :include => :consumer
   end
 
   def edit

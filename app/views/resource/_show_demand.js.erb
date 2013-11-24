@@ -8,6 +8,12 @@ $('#show_demand').click(function() {
 		data: {"id": demand_id},
 		dataType: "JSON" 
   }).success(function(demand){
-        $(".modal-body").text(demand);
+    $("#demand_short_description").text(demand.short_description);
+    $("#demand_description").text(demand.description);
+    $("#demand_intensity").text(demand.intensity);
+    $("#demand_start_at").text(demand.start_at);
+    $("#demand_end_at").text(demand.end_at);
+    $("#demand_consumer_name").text(demand.consumer.name);
+    $("#demand_consumer_email").text(demand.consumer.email);
   });
 });

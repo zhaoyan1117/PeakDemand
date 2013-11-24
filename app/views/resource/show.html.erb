@@ -2,83 +2,81 @@
 
 <div class="screen">
 
-	<div>
-		<h1 id="detail_rsrc_title"> <%= @resource.name %> </h1>
+    <div>
+        <h1 id="detail_rsrc_title"> <%= @resource.name %> </h1>
 
-		<% if @user && @user == @resource.provider %>
-		<span>
-			<%= link_to "Edit", edit_resource_url(@resource) %>
-			<%= link_to "Delete", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
-		</span>
-		<% end %>
+        <% if @user && @user == @resource.provider %>
+        <span>
+            <%= link_to "Edit", edit_resource_url(@resource) %>
+            <%= link_to "Delete", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
+        </span>
+        <% end %>
 
-		<p><%= @resource.short_description %>. Created by <%= @resource.provider_name %></p>
-	</div>
+        <p><%= @resource.short_description %>. Created by <%= @resource.provider_name %></p>
+    </div>
 
-	<div>
-		<h3 class="detail_rsrc_sec">Description</h3>
-		<p> <%= @resource.description %> </p>
-		<p>  </p>
-	</div>
+    <div>
+        <h3 class="detail_rsrc_sec">Description</h3>
+        <p> <%= @resource.description %> </p>
+        <p>  </p>
+    </div>
 
-	<div class="detail_rsrc_avail">
-		<div class="detail_availablity">
-			<h3 class="detail_rsrc_sec">Available from</h3>
-			<p><%= @resource.start_at %></p>
-		</div>
+    <div class="detail_rsrc_avail">
+        <div class="detail_availablity">
+            <h3 class="detail_rsrc_sec">Available from</h3>
+            <p><%= @resource.start_at %></p>
+        </div>
 
-		<div class="detail_availablity detail_clear">
-			<h3 class="detail_rsrc_sec">End in</h3>
-			<p> <%= @resource.end_at %> </p>
-		</div>
-	</div>
+        <div class="detail_availablity detail_clear">
+            <h3 class="detail_rsrc_sec">End in</h3>
+            <p> <%= @resource.end_at %> </p>
+        </div>
+    </div>
 
-	<div class="detail_demands">
-		<div class="demands_calendar">
-			<h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= @cgi_cal_id %>">Copy</span></h3>
+    <div class="detail_demands">
+        <div class="demands_calendar">
+            <h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= @cgi_cal_id %>">Copy</span></h3>
 
-			<div id='calendar'></div>
+            <div id='calendar'></div>
+            <script type='text/javascript'>
+                $(document).ready(function() {
+                    $('#calendar').fullCalendar({
+                        events: $.fullCalendar.gcalFeed(
+                            "<%= @calendar_xml_feed %>"
+                        )
+                    });
+                });
+            </script>
+        </div>
 
+        <div class="demands_list">
+            <h3 class="detail_rsrc_sec">Demand List</h3>
 
-							<script type='text/javascript'>
-								$(document).ready(function() {
-								    $('#calendar').fullCalendar({
-								        events: $.fullCalendar.gcalFeed(
-								            "<%= @calendar_xml_feed %>"
-								        )
-								    });
-								});
-							</script>
-		</div>
+            <% if @resource.demands.empty? %>
+                <p> There is no demand on this resource currently!</p>
+                <%= link_to "Create Demand", new_resource_demand_url(@resource) %>
 
-		<div class="demands_list">
-			<h3 class="detail_rsrc_sec">Demand List</h3>
+            <% else %>
 
-			<% if @resource.demands.empty? %>
-				<p> There is no demand on this resource currently!</p>
-				<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
+                <table>
+                    <tr class="demands_list_title">
+                        <th>Consumer</th>
+                        <th>Intensity</th>
+                        <th>Duration</th>
+                    </tr>
+                </table>
+                <div class="each_demand"><%= link_to "Add a Demand", new_resource_demand_url(@resource) %></div>
 
-			<% else %>
-
-				<table>
-					<tr class="demands_list_title">
-						<th>Consumer</th>
-						<th>Intensity</th>
-						<th>Duration</th>
-					</tr>
-				</table>
-				<div class="each_demand"><%= link_to "Add a Demand", new_resource_demand_url(@resource) %></div>
-
-				<% @resource.demands.each do |d| %>
+                <% @resource.demands.each do |d| %>
                     <%= content_tag "div", :class => "each_demand", :id => "show_demand", :data => {target: "#myModal", toggle: "modal", id: 1, url: resource_demand_url(@resource, d)} do %>
                         <span class="each_demand_content"><%= d.consumer_name %></span>
                         <span class="each_demand_content"><%= d.intensity %></span>
                         <span class="each_demand_content"><%= d.start_at %> - <%= d.end_at %></span>
                     <% end %>
-				<% end %>
-			<% end %>
-		</div>
-    </div>	
+                <% end %>
+            <% end %>
+        </div>
+    </div>  
 
 </div>
 
@@ -92,6 +90,13 @@
       </div>
       
       <div class="modal-body">
+        <div id="demand_short_description"></div>      
+        <div id="demand_description"></div>
+        <div id="demand_intensity"></div>
+        <div id="demand_start_at"></div>
+        <div id="demand_end_at"></div>
+        <div id="demand_consumer_email"></div>
+        <div id="demand_consumer_name"></div>
       </div>
       
       <div class="modal-footer">
