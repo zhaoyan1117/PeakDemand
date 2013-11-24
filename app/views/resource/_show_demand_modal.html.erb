@@ -1,11 +1,11 @@
 <!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="show_demand_modal" tabindex="-1" role="dialog" aria-labelledby="show_demand_modal_label" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <span class="modal-title demand_short_description"></span> <span class="demand_consumer_name"></span>
+        <span class="modal-title demand_short_description" id="show_demand_modal_label"></span> <span class="demand_consumer_name"></span>
       </div>
       
       <div class="modal-body">
@@ -13,21 +13,15 @@
         <span class="demand_intensity"></span>
         from <span class="demand_start_at"></span> to <span class="demand_end_at"></span>
 
-        <div class="demand_description"></div><br>
+        <div class="demand_description"></div>
 
-          <%= form_for :mail, :method => :post, :url => "/mail/send", :html => {:class => 'msg_form'} do |f|  %>
-              <%= f.label :To %>
-              <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email' %><br />
-              <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
-            <%= submit_tag "Send", :class => 'send_button' %>
-          <% end %>
-
-
-
-
-
-
-
+        <br>
+        <%= form_for :mail, :method => :post, :url => "/mail/send", :html => {:class => 'msg_form'} do |f|  %>
+            <%= f.label :To %>
+            <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email' %><br/>
+            <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
+          <%= submit_tag "Send", :class => 'send_button' %>
+        <% end %>
       </div>
 
     </div><!-- /.modal-content -->
