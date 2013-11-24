@@ -1,12 +1,12 @@
-$('#show_demand').click(function() {
+$('.each_demand').click(function() {
   var demand_id = $(this).data('id');
   var demand_url = $(this).data('url');
-  
+
   $.ajax({
 		type: "GET",
 		url: demand_url,
 		data: {"id": demand_id},
-		dataType: "JSON" 
+		dataType: "JSON"
   }).success(function(demand){
     $("#demand_short_description").text(demand.short_description);
     $("#demand_description").text(demand.description);

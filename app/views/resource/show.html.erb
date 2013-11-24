@@ -68,7 +68,7 @@
                 <div class="each_demand"><%= link_to "Add a Demand", new_resource_demand_url(@resource) %></div>
 
                 <% @resource.demands.each do |d| %>
-                    <%= content_tag "div", :class => "each_demand", :id => "show_demand", :data => {target: "#myModal", toggle: "modal", id: 1, url: resource_demand_url(@resource, d)} do %>
+                    <%= content_tag "div", :class => "each_demand", :data => {target: "#myModal", toggle: "modal", id: d.id, url: resource_demand_url(@resource, d)} do %>
                         <span class="each_demand_content"><%= d.consumer_name %></span>
                         <span class="each_demand_content"><%= d.intensity %></span>
                         <span class="each_demand_content"><%= d.start_at %> - <%= d.end_at %></span>
@@ -108,6 +108,5 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    <%= render :partial => 'show_demand.js',
-               :locals => { :resource_id => @resource.id } %>
+    <%= render :partial => 'show_demand.js' %>
 </script>

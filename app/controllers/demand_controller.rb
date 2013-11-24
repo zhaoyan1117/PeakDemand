@@ -17,12 +17,11 @@ class DemandController < ApplicationController
   def create
     d = Demand.new params["demand"].merge("consumer" => @user, "resource" => @resource)
     
-    if d.save
-      redirect_to resource_demand_url(@resource, d)
-    else
+    if !d.save
       flash[:error] = d.errors.full_messages
-      redirect_to new_resource_demand_url(@resource)
     end
+    
+    redirect_to new_resource_demand_url(@resource)
   end
 
   def show
