@@ -1,7 +1,7 @@
 <%= render 'shared/user_header' %>
 
 <div class="screen">
-	<div>
+	<div class="detail_rsrc_left">
 		<h1 id="detail_rsrc_title"> <%= @resource.name %> </h1>
 
 		<% if @user && @user == @resource.provider %>
@@ -14,13 +14,13 @@
 		<p><%= @resource.short_description %>. Created by <%= @resource.provider_name %></p>
 	</div>
 
-	<div>
+	<div class="detail_rsrc_left">
 		<h3 class="detail_rsrc_sec">Description</h3>
 		<p> <%= @resource.description %> </p>
 		<p>  </p>
 	</div>
 
-	<div class="detail_rsrc_avail">
+	<div class="detail_rsrc_right">
 		<div class="detail_availablity">
 			<h3 class="detail_rsrc_sec">Available from</h3>
 			<p><%= @resource.start_at %></p>
@@ -31,45 +31,46 @@
 			<p> <%= @resource.end_at %> </p>
 		</div>
 	</div>
+</div>
 
-	<div class="detail_demands">
-		<div class="demands_calendar">
-			<h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= @cgi_cal_id %>">Copy</span></h3>
+<div class="bottom_screen">
+    <div class="left_screen">
+        <h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= @cgi_cal_id %>">Copy</span></h3>
 
-			<div id='calendar'></div>
+        <div id='calendar'></div>
 
 
-							<script type='text/javascript'>
-								$(document).ready(function() {
-								    $('#calendar').fullCalendar({
-								        events: $.fullCalendar.gcalFeed(
-								            "<%= @calendar_xml_feed %>"
-								        )
-								    });
-								});
-							</script>
-		</div>
+        <script type='text/javascript'>
+            $(document).ready(function() {
+                $('#calendar').fullCalendar({
+                    events: $.fullCalendar.gcalFeed(
+                        "<%= @calendar_xml_feed %>"
+                    )
+                });
+            });
+        </script>
+    </div>
 
-		<div class="demands_list">
-			<h3 class="detail_rsrc_sec">Demand List</h3>
+    <div class="right_screen">
+        <h3 class="detail_rsrc_sec">Demand List</h3>
 
-			<% if @resource.demands.empty? %>
-				<p> There is no demand on this resource currently!</p>
-				<%= link_to "Create Demand", new_resource_demand_url(@resource) %>
+        <% if @resource.demands.empty? %>
+            <p> There is no demand on this resource currently!</p>
+            <%= link_to "Create Demand", new_resource_demand_url(@resource) %>
 
-			<% else %>
-				<div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
+        <% else %>
+            <div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
 
-				<% @resource.demands.each do |d| %>
-                    <%= content_tag "div", :class => "each_demand", :data => {target: "#myModal", toggle: "modal", id: d.id, url: resource_demand_url(@resource, d)} do %>
-                        <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
-                        <span class="each_demand_content"><span class="each_demand_intensity"><%= d.intensity %></span></span>
-                        <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
-                    <% end %>
+            <% @resource.demands.each do |d| %>
+                <%= content_tag "div", :class => "each_demand", :data => {target: "#myModal", toggle: "modal", id: d.id, url: resource_demand_url(@resource, d)} do %>
+                    <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
+                    <span class="each_demand_content"><span class="each_demand_intensity <%= d.intensity %>_color"><%= d.intensity %></span></span>
+                    <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
                 <% end %>
             <% end %>
-        </div>
-    </div>  
+        <% end %>
+    </div>
+</div>
 
 </div>
 
@@ -83,7 +84,7 @@
       </div>
       
       <div class="modal-body">
-        <div id="demand_short_description"></div>      
+        <div id="demand_short_description"></div> 
         <div id="demand_description"></div>
         <div id="demand_intensity"></div>
         <div id="demand_start_at"></div>
@@ -101,5 +102,6 @@
 </div><!-- /.modal -->
 
 <script type="text/javascript">
-    <%= render :partial => 'show_demand.js' %>
+    <%= render :partial => 'show_demand.js',
+               :locals => { :resource_id => @resource.id } %>
 </script>
