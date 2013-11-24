@@ -42,25 +42,25 @@ describe DemandController do
       @demand = FactoryGirl.build :demand, :consumer => @user, :resource => @resource
     end
 
-    it "should redirect to resource demand page if save successfully" do
+    it "should redirect to resource page if save successfully" do
       Resource.should_receive(:find).and_return(@resource)
       Demand.should_receive(:new).and_return(@demand)
       @demand.should_receive(:create_event)
       @resource.stub(:create_calendar)
 
       post :create, :resource_id => @resource.id, :demand => @demand_param
-      response.should redirect_to resource_demand_url(@resource, @demand)
+      response.should redirect_to resource_url(@resource)
       response.status.should == 302
     end
 
-    it "should redirect to new resource demand page if save failed" do
+    it "should redirect to resource page witha error messages if save failed" do
       Resource.should_receive(:find).and_return(@resource)
       Demand.should_receive(:new).and_return(@demand)
       @demand.stub(:save).and_return(false)
 
       post :create, :resource_id => @resource.id, :demand => @demand_param
       flash[:error].should_not be_nil
-      response.should redirect_to new_resource_demand_url(@resource)
+      response.should redirect_to resource_url(@resource)
       response.status.should == 302
     end
   end
