@@ -1,15 +1,14 @@
 <%= render 'shared/user_header' %>
 
 <div class="screen">
-
 	<div>
 		<h1 id="detail_rsrc_title"> <%= @resource.name %> </h1>
 
 		<% if @user && @user == @resource.provider %>
-		<span>
-			<%= link_to "Edit", edit_resource_url(@resource) %>
-			<%= link_to "Delete", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
-		</span>
+    		<span>
+    			<%= link_to "Edit", edit_resource_url(@resource) %>
+    			<%= link_to "Delete", resource_url(@resource), :method => :delete, :confirm => 'Are you sure?'%>
+    		</span>
 		<% end %>
 
 		<p><%= @resource.short_description %>. Created by <%= @resource.provider_name %></p>
@@ -67,10 +66,10 @@
                         <span class="each_demand_content"><span class="each_demand_intensity"><%= d.intensity %></span></span>
                         <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
                     <% end %>
-				<% end %>
-			<% end %>
-		</div>
-    </div>	
+                <% end %>
+            <% end %>
+        </div>
+    </div>  
 
 </div>
 
@@ -84,6 +83,13 @@
       </div>
       
       <div class="modal-body">
+        <div id="demand_short_description"></div>      
+        <div id="demand_description"></div>
+        <div id="demand_intensity"></div>
+        <div id="demand_start_at"></div>
+        <div id="demand_end_at"></div>
+        <div id="demand_consumer_email"></div>
+        <div id="demand_consumer_name"></div>
       </div>
       
       <div class="modal-footer">

@@ -2,12 +2,14 @@ PeakDemand::Application.routes.draw do
   
   root :to => 'resource#index'
 
-  devise_for :users
+  devise_for :users #do
+  get '/mail/new' => 'UserMailer#new_email'
+  post '/mail/send' => 'UserMailer#send_email'
+  #end
 
   resources :resource do
     resources :demand, :except => :index
   end
-
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
