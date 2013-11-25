@@ -1,3 +1,4 @@
+// Show demand modal, ajax.
 $('.each_demand').click(function() {
   var demand_id = $(this).data('id');
   var demand_url = $(this).data('url');
@@ -21,8 +22,10 @@ $('.each_demand').click(function() {
   });
 });
 
+// Auto resize text area.
 $('textarea').autosize();
 
+// Login in to email. TODO: replace with real login modal/dropdown.
 $('.login_in_demand_modal').click(function() {
   $('#show_demand_modal').modal('toggle');
   $('#new_demand_modal').modal('toggle');

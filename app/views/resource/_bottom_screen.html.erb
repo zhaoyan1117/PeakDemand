@@ -1,6 +1,9 @@
 <div class="bottom_screen">
     <div class="left_screen">
-        <h3 class="detail_rsrc_sec">Demand Calendar <span id="<%= cgi_cal_id %>">Copy</span></h3>
+        <h3 class="detail_rsrc_sec">Demand Calendar <span id='copy_clipboard' data-clipboard-text="<%= cgi_cal_id %>">Copy</span></h3>
+        <script>
+            <%= render :partial => 'copy_clipboard.js' %>
+        </script>
 
         <div id='calendar'></div>
         <script type="text/javascript">

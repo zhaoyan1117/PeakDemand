@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 
-//= require fullcalendar
+//= require zeroclipboard
 //= require jquery.autosize.min
+
+//= require fullcalendar
 //= require gcal
 //= require_tree .

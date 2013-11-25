@@ -41,6 +41,7 @@ end
 
 gem 'jquery-rails'
 gem 'devise'
+gem 'zeroclipboard-rails'
 gem 'gcal4ruby', :github => 'zhaoyan1117/GCal4Ruby'
 
 # Use unicorn as the web server

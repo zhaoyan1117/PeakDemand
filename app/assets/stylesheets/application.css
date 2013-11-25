@@ -293,6 +293,9 @@ a {text-decoration: none}
 	float: left;
 }
 
+#copy_clipboard {
+	color: red;
+}
 
 .fc-header-title h2 {
 	font-size: 1em;
