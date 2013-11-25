@@ -2,10 +2,9 @@ PeakDemand::Application.routes.draw do
   
   root :to => 'resource#index'
 
-  devise_for :users #do
-  get '/mail/new' => 'UserMailer#new_email'
+  devise_for :users
+  
   post '/mail/send' => 'UserMailer#send_email'
-  #end
 
   resources :resource do
     resources :demand, :except => :index
