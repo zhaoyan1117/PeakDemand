@@ -58,6 +58,10 @@ When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
 
+When /^(?:|I )push the selector "([^"]*)"$/ do |selector|
+  find(selector).click
+end
+
 When /^(?:|I )fill in "([^"]*)" with "([^"]*)"$/ do |field, value|
   #print page.body
   fill_in(field, :with => value)

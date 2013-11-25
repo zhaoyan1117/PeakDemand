@@ -15,8 +15,6 @@ Scenario: Post a demand to an existing resource as a consumer
   When I am on the create demand page for "R1"
   When I choose "demand_intensity_moderate"
   Then I press "Submit" to create demand
-  Then I should see "Demand on R1"
-  When I follow "Go Back"
   Then I should see "c1"
   And I should see "MODERATE"
 
@@ -26,8 +24,7 @@ Scenario: Post a demand as a provider (sad path)
   | name | start_at |  end_at   |
   | R1   |2013-10-26|2013-11-18 |
   When I am on the resource detail page of "R1"
-  When I follow "Create Demand"
-  Then I should see "Please register as a consumer to create demand!"
+  Then I should not see "Add a new demand"
 
 Scenario: Post a demand without signing in 
   Given provider "p1" with email "p1@p1.com" and password "password" has signed up 
@@ -36,5 +33,4 @@ Scenario: Post a demand without signing in
   | R1   |2013-10-26|2013-11-18 |
   When I follow "Log Out"
   When I am on the resource detail page of "R1"
-  When I follow "Create Demand"
-  Then I should be on the login page 
+  Then I should not see "Create Demand"
