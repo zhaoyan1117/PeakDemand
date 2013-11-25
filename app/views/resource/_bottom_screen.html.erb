@@ -20,10 +20,14 @@
             <%= link_to "Create Demand", new_resource_demand_url(resource) %>
         <% else %>
 
-            <%= content_tag 'div', :class => 'new_demand', :data => {target: '#new_demand_modal', toggle: 'modal', url: new_resource_demand_url(resource)} do %>
-                <span class="new_demand_content">Add a new demand</span>
+            <%= link_to new_resource_demand_url(resource) do %>
+                <div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
             <% end %>
 
+<!--             <%= content_tag 'div', :class => 'new_demand', :data => {target: '#new_demand_modal', toggle: 'modal', url: new_resource_demand_url(resource)} do %>
+                <span class="new_demand_content">Add a new demand</span>
+            <% end %>
+ -->
             <% resource.demands.each do |d| %>
                 <%= content_tag "div", :class => "each_demand", :data => {target: "#show_demand_modal", toggle: "modal", id: d.id, url: resource_demand_url(resource, d)} do %>
                     <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
