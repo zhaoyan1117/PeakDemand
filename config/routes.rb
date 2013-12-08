@@ -1,5 +1,13 @@
 PeakDemand::Application.routes.draw do
   
+  get "announcement/show"
+
+  get "announcement/destroy"
+
+  get "announcement/create"
+
+  get "announcement/update"
+
   root :to => 'resource#index'
 
   devise_for :users
