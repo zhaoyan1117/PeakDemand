@@ -26,30 +26,15 @@
 			<% end %>
 		<% end %>
 
+		<div class="creating_resource"> we are creating your resource now, please wait</div>
+
 		<div class="create_resource">New Resource</div>
 	</div>
 </div>
 
 <div class="new_resource">
-	<%= form_for :resource, :method => :post, :url => '/resource' do |f|  %>
-
-		<%= f.label :name %><br>
-		<%= f.text_field :name %><br>
-
-		<%= f.label :short_description %><br>
-		<%= f.text_field :short_description %><br>
-
-		<%= f.label :description %><br>
-		<%= f.text_area :description %><br>
-
-		<%= f.label :available_on %><br>
-		<input id="resource_start_at" name="resource[start_at]" type="date" value=<%=Date.today%>><br>
-
-		<%= f.label :end_at %><br>
-		<input id="resource_end_at" name="resource[end_at]" type="date" value=<%=Date.today%>><br>
-
-		<%= submit_tag("Submit") %>
-	<% end %>
+	<%= render :partial => 'resource/resource_form', 
+			   :locals => {:method => :post, :url => '/resource', :form_id => 'new_resource_form'} %>
 </div>
 
 <script type="text/javascript">

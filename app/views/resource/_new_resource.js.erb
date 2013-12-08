@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var animation_time = 300;
+	var animation_time = 1000;
 
 	$('.create_resource').click(function(){
 		$('.index_resource_bg').fadeIn(animation_time)
@@ -14,4 +14,52 @@ $(document).ready(function() {
 		$('.create_resource').delay(animation_time).fadeIn(animation_time);
 	});
 
+	function build_resource_html (resource) {
+		return '<a href="' + resource.url + '"> \
+				<div class="each_resource"> \
+					<div class="r_bg"> \
+						<div class="r_name"> ' + resource.name + ' </div> \
+						<div class="r_des"> ' + resource.short_description + ' </div> \
+					</div> \
+					<div class="r_sm"> \
+						<div class="r_item"> <div class="r_item_title">Start</div>' + resource.start_at + '</div> \
+						<div class="r_item"> <div class="r_item_title">End</div>' + resource.end_at + ' </div> \
+						<div class="r_item"> <div class="r_item_title">Provider</div>' + resource.provider_name + '</div> \
+						<div class="r_item"> <div class="r_item_title">Demand</div>0</div> \
+					</div> \
+				</div>'
+	}
+
+	$("#new_resource_form").submit(function(e) {
+
+		$('.index_resource_bg').fadeOut(animation_time)
+		$('.new_resource').fadeOut(animation_time);
+		$('.creating_resource').delay(animation_time).fadeIn(animation_time);
+
+	    var postData = $(this).serializeArray();
+	    var formURL = $(this).attr("action");
+
+	    $.ajax(
+	    {
+	        url : formURL,
+	        type: "POST",
+	        data : postData,
+	        dataType : 'json',
+	        success:function(data, textStatus, jqXHR) 
+	        {
+	        	var resource_html = build_resource_html(data);
+
+				$('.creating_resource').fadeOut(animation_time);
+				$(resource_html).hide().insertBefore('.create_resource').delay(animation_time).fadeIn(animation_time);
+        		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) 
+	        {
+
+	        }
+	    });
+
+	    e.preventDefault();
+	});
+	 
 });

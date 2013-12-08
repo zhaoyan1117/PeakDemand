@@ -19,7 +19,7 @@ class ResourceController < ApplicationController
     r = Resource.new params["resource"].merge("provider" => @user)
 
     if r.save
-      redirect_to resource_index_url
+      render :json => r.attributes.merge({:url => resource_url(r), :provider_name => r.provider_name})
     else
       flash[:error] = r.errors.full_messages
       redirect_to new_resource_url
