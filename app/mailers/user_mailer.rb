@@ -2,8 +2,6 @@ class UserMailer < ActionMailer::Base
   default :from => "peakdemand.saas@gmail.com"#"from@example.com"
 
   def generate_email(user,subject,to,body,sender,demand,url)
-  	print "&&&&&&&&&&&&&&&&"
-  	print url
   	@body = body
   	@sender_name = sender.name
   	@sender_email = sender.email
