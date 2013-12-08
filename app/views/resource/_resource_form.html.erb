@@ -1,13 +1,10 @@
 <%= form_for :resource, :method => method, :url => url, :html => {:id => form_id} do |f|  %>
 
-	<%= f.label :name %><br>
-	<%= f.text_field :name %><br>
+	<%= f.text_field :name, :placeholder => 'resource name', :required => 'required' %><br>
 
-	<%= f.label :short_description %><br>
-	<%= f.text_field :short_description %><br>
+	<%= f.text_field :short_description, :placeholder => 'short description' %><br>
 
-	<%= f.label :description %><br>
-	<%= f.text_area :description %><br>
+	<%= f.text_area :description, :placeholder => 'description' %><br>
 
 	<%= f.label :available_on %><br>
 	<input id="resource_start_at" name="resource[start_at]" type="date" value=<%=Date.today%>><br>

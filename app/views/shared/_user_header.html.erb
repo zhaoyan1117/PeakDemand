@@ -1,25 +1,35 @@
 <div class="top_banner">
-    <div class="logo">
-        <%= link_to resource_index_url do %>
-            <%= image_tag "logo.png" %>
-        <% end %>
-    </div>
-    
-    <div class="user_profile">
-        <% if user_signed_in? %>
-                <%= link_to destroy_user_session_path, :method => :delete do %>
-                    <div class="logout">Log Out</div>
-                <% end %>
+	<div class="logo">
+		<%= link_to resource_index_url do %>
+			<%= image_tag "logo.png" %>
+		<% end %>
+	</div>
+	
+	<div class="user_profile">
+		<% if user_signed_in? %>
+				<%= link_to destroy_user_session_path, :method => :delete do %>
+					<div class="logout">Log Out</div>
+				<% end %>
 
-                <%= link_to edit_user_registration_path(@user) do %>
-                    <div class="my_account">My Account</div>
-                <% end %>
+				<%= link_to edit_user_registration_path(@user) do %>
+					<div class="my_account">My Account</div>
+				<% end %>
 
-        <% else %>
+		<% else %>
 
-                <%= link_to new_user_session_url do %>
-                    <div class="login">Sign In</div>
-                <% end %>
-        <% end %>
-    </div>
+				<div class="dropdown">
+					<div class="login" data-toggle="dropdown">Sign In</div>
+					<div class='dropdown-menu' >
+						<%= form_for("user", :url => user_session_path) do |f| %>
+							<%= f.text_field :email %>
+							<%= f.password_field :password %>
+							<% if devise_mapping.rememberable? -%>
+								<div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+							<% end -%>
+							<%= f.submit 'Sign in' %>
+						<% end %>
+					</div>  
+				</div>
+		<% end %>
+	</div>
 </div>

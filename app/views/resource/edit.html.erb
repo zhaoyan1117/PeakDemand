@@ -1,9 +1,0 @@
-<%= render 'shared/user_header' %>
-
-<h2>Edit <%= @resource.name %></h2>
-
-<%= render :partial => 'resource/resource_form', 
-		   :locals => {:method => :put, :url => resource_url(@resource) } %>
-
-<br>
-<%= link_to "Go Back", resource_url(@resource) %>

@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	var animation_time = 1000;
+	var animation_time = 300;
 
 	$('.create_resource').click(function(){
 		$('.index_resource_bg').fadeIn(animation_time)
@@ -55,7 +55,7 @@ $(document).ready(function() {
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) 
 	        {
-
+	        	alert('error');	
 	        }
 	    });
 
