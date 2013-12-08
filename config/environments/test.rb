@@ -40,4 +40,15 @@ PeakDemand::Application.configure do
     config.password = 'PeakDemand.CS169'
   end
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+  :address              => "smtp.gmail.com",
+  :port                 => 587,
+  :user_name            => 'peakdemand.saas@gmail.com',
+  :password             => 'PeakDemand.CS169',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true  }
+
+  #config.action_mailer.default_url_options = { :host => "localhost" }
+
 end

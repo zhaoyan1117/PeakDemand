@@ -4,11 +4,11 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Sample Email</h1>
-    <p>
-      Use for testing
-      Send to: <%= @to %>.<br/>
-      Body: <%= @body %>.<br/>
+    Please do not directly reply this email
+    <h3>You have receive a message from <%= @sender_name%>(<%= @sender_email%>) regarding your demand from <%= @demand_start%> to <%= @demand_end%> on resource <a href=<%= @resource_link%>> <%= @resource_name%>. </a><br/></h3>
+    <p> 
+      Send from: <%= @sender_name %>.(<%= @sender_email%>)<br/>
+      <%= @body %><br/>
     </p>
   </body>
 </html>
