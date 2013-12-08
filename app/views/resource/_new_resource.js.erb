@@ -1,0 +1,17 @@
+$(document).ready(function() {
+
+	var animation_time = 300;
+
+	$('.create_resource').click(function(){
+		$('.index_resource_bg').fadeIn(animation_time)
+		$('.create_resource').fadeOut(animation_time);
+		$('.new_resource').delay(animation_time).fadeIn(animation_time);
+	});
+
+	$('.index_resource_bg').click(function(){
+		$('.index_resource_bg').fadeOut(animation_time)
+		$('.new_resource').fadeOut(animation_time);
+		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+	});
+
+});
