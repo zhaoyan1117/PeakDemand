@@ -7,10 +7,10 @@
 <div class="content">
 
 	<div class="dashboard">
-		<div class="inner_banner"><i>All Resources</i> <b> | </b> <i>My Resources</i></div>
+		<div class="inner_banner"><i id='all_resources' class='show_mode_selected'>All Resources</i> <b> | </b> <i id='my_resources'>My Resources</i></div>
 		<% @resources.each do |r| %>
 			<%= link_to resource_url r do %>
-				<div class="each_resource">
+				<div class="each_resource <%= (r.is_my_resource?(@user) && 'my_resource') || 'other_resource' %>">
 					<div class="r_bg">
 						<div class="r_name"> <%= r.name %> </div>
 						<div class="r_des"> <%= r.short_description %> </div>
@@ -34,10 +34,14 @@
 	<div class="new_resource">
 	<%= render :partial => 'resource/resource_form', 
 			   :locals => {:method => :post, :url => '/resource', :form_id => 'new_resource_form'} %>
-</div>
+	</div>
 </div>
 
 
+<script type="text/javascript">
+    <%= render :partial => 'my_resources',
+               :formats => [:js] %>
+</script>
 
 <script type="text/javascript">
     <%= render :partial => 'new_resource',

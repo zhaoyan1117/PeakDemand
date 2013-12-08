@@ -1,0 +1,16 @@
+$(document).ready(function() {
+
+	$('#my_resources').click(function () {
+		$(this).addClass('show_mode_selected');
+		$('#all_resources').removeClass('show_mode_selected');
+		$('.other_resource').fadeOut(300);
+	});
+
+	$('#all_resources').click(function () {
+		$(this).addClass('show_mode_selected');
+		$('#my_resources').removeClass('show_mode_selected');
+		$('.other_resource').fadeIn(300);
+	});
+
+
+});

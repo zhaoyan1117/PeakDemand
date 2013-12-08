@@ -15,6 +15,10 @@ class Resource < ActiveRecord::Base
     provider.name
   end
 
+  def is_my_resource? user
+    provider == user || demands.any? { |d| d.consumer == user }
+  end
+
   def get_number_of_demands
     demands.size
   end
