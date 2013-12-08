@@ -1,20 +1,27 @@
 <%= form_for :resource, :method => method, :url => url, :html => {:id => form_id} do |f|  %>
 
-	<%= f.label :name %><br>
-	<%= f.text_field :name %><br>
+	<div class="new_resource_name">
+		<%= f.text_field :name, :placeholder => 'Resource Name', :required => 'required'%><br>
+		<%= f.text_field :short_description, :placeholder => 'Short Description (optional)'%>
+	</div>
 
-	<%= f.label :short_description %><br>
-	<%= f.text_field :short_description %><br>
+	<div class="new_resource_time">
+		<span>
+			<%= f.label :end_at %>
+			<input id="resource_end_at" name="resource[end_at]" type="date" required="required" value=<%=Date.today%>>
+		</span>
 
-	<%= f.label :description %><br>
-	<%= f.text_area :description %><br>
+		<span>
+			<%= f.label :available_on %>
+			<input id="resource_start_at" name="resource[start_at]" type="date" required="required" value=<%=Date.today%>>
+		</span>
+	</div>
+	
+	<div class="new_resource_des">
+		<%= f.text_area :description, :placeholder => 'Full Description (optional)'%><br>
+	</div>
 
-	<%= f.label :available_on %><br>
-	<input id="resource_start_at" name="resource[start_at]" type="date" value=<%=Date.today%>><br>
-
-	<%= f.label :end_at %><br>
-	<input id="resource_end_at" name="resource[end_at]" type="date" value=<%=Date.today%>><br>
-
-	<%= submit_tag "Submit" %>
+	<div class="resource_form_submit"><%= submit_tag "Submit"%></div>
+	
 
 <% end %>

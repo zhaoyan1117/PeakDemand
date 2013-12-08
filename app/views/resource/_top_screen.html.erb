@@ -1,33 +1,36 @@
 <div class="screen">
-	<div class="detail_rsrc_left">
-		<h1 id="detail_rsrc_title"> <%= resource.name %> </h1>
+	<div class="screen_inner">
+		<div class="detail_rsrc_left">
+			<h1 id="detail_rsrc_title"> <%= resource.name %> </h1>
 
-		<% if user && user == resource.provider %>
-    		<span>
-    			<%= link_to "Edit", edit_resource_url(resource) %>
-    			<%= link_to "Delete", resource_url(resource), :method => :delete, :confirm => 'Are you sure?'%>
-    		</span>
-		<% end %>
+			<% if user && user == resource.provider %>
+	    		<span>
+	    			<%= link_to "Edit", edit_resource_url(resource) %>
+	    			<%= link_to "Delete", resource_url(resource), :method => :delete, :confirm => 'Are you sure?'%>
+	    		</span>
+			<% end %>
 
-		<p><%= resource.short_description %>. Created by <%= resource.provider_name %></p>
-	</div>
-
-	<div class="detail_rsrc_left">
-		<h3 class="detail_rsrc_sec">Description</h3>
-		<p> <%= resource.description %> </p>
-		<p>  </p>
-	</div>
-
-	<div class="detail_rsrc_right">
-		<div class="detail_availablity">
-			<h3 class="detail_rsrc_sec">Available from</h3>
-			<p><%= resource.start_at %></p>
+			<p><%= resource.short_description %>. Created by <%= resource.provider_name %></p>
 		</div>
 
-		<div class="detail_availablity detail_clear">
-			<h3 class="detail_rsrc_sec">End in</h3>
-			<p> <%= resource.end_at %> </p>
+		<div class="detail_rsrc_right">
+			<div class="detail_availablity">
+				<h3 class="detail_rsrc_sec">Available from</h3>
+				<p><%= resource.start_at %></p>
+			</div>
+
+			<div class="detail_availablity detail_clear">
+				<h3 class="detail_rsrc_sec">End in</h3>
+				<p> <%= resource.end_at %> </p>
+			</div>
 		</div>
+
+
+		<div class="detail_rsrc_bottom">
+			<h3 class="detail_rsrc_sec">Description</h3>
+			<p> <%= resource.description %> </p>
+		</div>
+
 	</div>
 </div>
 

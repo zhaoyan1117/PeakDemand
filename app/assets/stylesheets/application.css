@@ -19,7 +19,6 @@ body {
 	margin: 0;
 	padding: 0;
 	font-size: 16px;
-	padding-bottom: 100px;
 
 	background-color: rgb(229,229,229);
 	background-image: url('/assets/background.jpg');
@@ -56,7 +55,7 @@ a {text-decoration: none}
 .user_profile {
 	position: relative;
 	float: right;
-	top: -10px;
+	top: -15px;
 	width: 200px;
 	font-size: .9em;
 	line-height: 1.2em;
@@ -87,12 +86,14 @@ a {text-decoration: none}
 
 
 
-
+.content {
+	margin-bottom: 100px;
+}
 
 .content i {
 	position: relative;
 	top:9px;
-	left: 75px;
+	left: 13px;
 	font-size: .9em;
 	color: rgb(155,155,155);
 	text-align: center;
@@ -100,19 +101,42 @@ a {text-decoration: none}
 	font-style: normal;
 }
 
+.content b {
+	position: relative;
+	top:9px;
+	left: 13px;
+	font-size: .9em;
+	color: rgb(155,155,155);
+	text-align: center;
+	font-weight: 100;
+	font-style: normal;
+}
+
+.content i:hover {
+	color: rgb(80,80,80);
+	cursor: pointer;
+}
+
 .dashboard {
-	margin-top: 48px;
+	margin-top: 54px;
+	width: 66%;
+	position: relative;
+	left: 5%;
+}
+
+.inner_banner {
+	height: 38px;
+	width: 100%;
 }
 
 .each_resource, .create_resource, .new_resource, .creating_resource {
-	background: rgb(250,250,250);
+	background: rgb(254,254,254);
 	padding: 5px;
 	border-radius: 2px;
-	box-shadow: 0px 1px 3px rgba(140,140,140, .6);
-	width: 70%;
+	box-shadow: 0px 1px 2px rgba(140,140,140, .6);
+	width:100%;
 	min-width: 700px;
 	margin-right: auto;
-	margin-left: 5%;
 
 	height: 62px;
 
@@ -120,13 +144,12 @@ a {text-decoration: none}
 }
 
 .each_resource:hover {
-	box-shadow: 0px 1px 5px rgba(150,150,150, .75), inset 0px 0px 1px rgb(50,50,50);
-	background-color: rgb(243,243,243);
+	box-shadow: 0px 1px 2px rgba(150,150,150, .75);
+	background-color: rgb(248,248,248);
 }
 
 .each_resource:active {
 	box-shadow: 0px 0px 3px rgba(140,140,140, .6) inset;
-	background: rgb(240,240,240);
 }
 
 .r_bg {
@@ -157,9 +180,9 @@ a {text-decoration: none}
 	height: 100%;
 	width: 42.5%;
 	float: right;
-	background-color: rgb(243,243,243);
+	background-color: rgb(248,248,248);
 	border-radius: 2px;
-	box-shadow: inset 0px 0px 3px rgba(100,100,100,.5);
+	box-shadow: inset 0px 0px 1px rgba(100,100,100,.6);
 }
 
 .r_item {
@@ -190,10 +213,10 @@ a {text-decoration: none}
 
 
 .create_resource:hover {
-	box-shadow: 0px 1px 4px rgba(150,150,150, .55);
-	border: 1px solid rgb(160,160,160);
-	padding-top: 10px;
-	padding-left: 3px;
+	background-color: rgb(224,224,224);
+	color: rgb(120,120,120);
+	box-shadow: 0px 1px 4px rgba(150,150,150, .55), 0px 0px 1px rgb(100,100,100) inset;
+	cursor: pointer;
 }
 
 .create_resource:active {
@@ -205,14 +228,76 @@ a {text-decoration: none}
 .new_resource {
 	display: none;
 	height: auto;
+	width: 66%;
 	position: relative;
-	background-color: rgb(216,216,216);
+	left: 5%;
+	background-color: rgb(254,254,254);
 	box-shadow: 0px 0px 0px white, 0px 1px 4px rgba(150,150,150, .55) inset;
 	font-size: 1.08em;
 	color: rgb(130,130,130);
 	text-align: center;
 	padding-top: 11px;
 	z-index: 2;
+}
+
+.new_resource_name {
+	width: 45%;
+	position: relative;
+	float: left;
+	left: 5px;
+	top: 5px;
+}
+#resource_name, #resource_short_description {
+	width: 95%;
+}
+
+.new_resource_time {
+	width: 55%;
+	height: 80px;
+	position: relative;
+	float: right;
+	top: 20px;
+}
+
+.new_resource_time span {
+	float: left;
+	width: 48%;
+	position: relative;
+	left: 10px;
+}
+
+#resource_end_at, #resource_start_at {
+	width: 86%;
+}
+
+.new_resource_des {
+	position: relative;
+	top: 10px;
+	width: 100%;
+}
+
+#resource_description {
+	width: 96.7%;
+	margin-right: auto;
+	margin-left: auto;
+	height:85px;
+}
+
+.resource_form_submit {
+	width: 98.2%;
+	height: 40px;
+	background-color: rgb(200,200,200);
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	top: 10px;
+}
+
+.resource_form_submit input {
+	background-color: rgb(200,200,200);
+	border-width: 0px;
+	width: 100%;
+	height: 100%;
 }
 
 .creating_resource {
@@ -227,6 +312,7 @@ a {text-decoration: none}
 	opacity: 0.6;
 	display: none;
 	position: fixed;
+	top: -2px;
 	width: 100%;
 	height: 100%;
 	z-index: 1;
@@ -281,13 +367,23 @@ a {text-decoration: none}
 	float: right;
 }
 
+
+
+
+
+
+
+
+
+
+
 .bottom_screen {
 	width: 1060px;
 	position: relative;
 	margin-right: auto;
 	margin-left: auto;
-	top: 220px;
-	padding-bottom: 610px;
+	top: 213px;
+	padding-bottom: 10px;
 	z-index: 0;
 }
 
