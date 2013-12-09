@@ -44,7 +44,7 @@ Scenario: View demand detail on the detail page of resource
   Then I press "Submit" to create demand
   When I am on the resource detail page of "R1"
   #Then inspect
-  When I push the selector "div.fc-event-inner"
+  When I push the selector "#demand_1"
   Then I should see "MODERATE"
 
 
