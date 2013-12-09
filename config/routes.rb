@@ -1,11 +1,18 @@
 PeakDemand::Application.routes.draw do
-
   # root
   root :to => 'resource#index'
   
-  # user & mailing
-  devise_for :users
-  post '/mail/send' => 'UserMailer#send_email'
+  # user
+  devise_for :users, :skip => [:sessions, :registrations]
+  as :user do
+    post '/sign_in' => 'devise/sessions#create', :as => :user_session
+    delete '/sign_out' => 'devise/sessions#destroy', :as => :destroy_user_session
+    post '/sign_up' => 'registrations#create', :as => :user_registration
+    put '/update_user' => 'registrations#update', :as => :update_user_registration
+  end
+
+  # mailing
+  post '/mail/send' => 'UserMailer#send_email', :as => :mail_send
 
   # admin & announcement
   get 'admin/index' => 'Admin#index'
