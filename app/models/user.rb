@@ -13,13 +13,8 @@ class User < ActiveRecord::Base
   validate :validate_must_have_identity
   validates :email, :uniqueness => true
 
-  def identity
-  	identity = []
-
-		identity << "Provider" if is_provider
-	  identity << "Consumer" if is_consumer
-
-    identity.join(", ")
+  def is_admin?
+    is_administrator
   end
 
   def validate_must_have_identity
