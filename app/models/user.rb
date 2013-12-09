@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     is_provider
   end
 
+  def is_admin?
+    is_administrator
+  end
+
   def validate_must_have_identity
     if !is_provider && !is_consumer
       errors[:identity] << "must have an identity!"

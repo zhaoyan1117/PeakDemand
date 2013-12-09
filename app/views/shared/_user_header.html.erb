@@ -6,6 +6,13 @@
 	</div>
 	
 	<div class="user_profile">
+
+		<% if @user && @user.is_admin? %>
+			<%= link_to admin_index_url do %>
+				<div clas="admin_dashboard">Admin Dashboard</div>
+			<% end %>
+		<% end %>
+		
 		<% if user_signed_in? %>
 				<%= link_to destroy_user_session_path, :method => :delete do %>
 					<div class="logout">Log Out</div>
@@ -16,7 +23,6 @@
 				<% end %>
 
 		<% else %>
-
 				<div class="dropdown">
 					<div class="login" data-toggle="dropdown">Sign In</div>
 					<div class='dropdown-menu' >
