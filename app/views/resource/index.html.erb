@@ -1,5 +1,3 @@
-<div class='index_resource_bg'></div>
-
 <%= render 'shared/user_header' %>
 
 <%= render 'shared/error' %>
@@ -7,7 +5,21 @@
 <div class="content">
 
 	<div class="dashboard">
-		<div class="inner_banner"><i id='all_resources' class='show_mode_selected'>All Resources</i> <b> | </b> <i id='my_resources'>My Resources</i></div>
+		<div class="inner_banner"><span id='all_resources' class='show_mode show_mode_selected'>All Resources</span> <% if @user %> <b> | </b> <span class='show_mode' id='my_resources'>My Resources</span> <% end %> </div>
+
+		<div class="creating_resource">
+			<%= image_tag "loader.gif" %>
+		</div>
+
+		<% if @user && @user.is_provider? %>
+			<div class="create_resource">New Resource</div>
+		<% end %>
+
+		<div class="new_resource">
+			<%= render :partial => 'resource/resource_form', 
+					   :locals => {:method => :post, :url => '/resource', :form_id => 'new_resource_form'} %>
+		</div>
+
 		<% @resources.each do |r| %>
 			<%= link_to resource_url r do %>
 				<div class="each_resource <%= (r.is_my_resource?(@user) && 'my_resource') || 'other_resource' %>">
@@ -25,16 +37,21 @@
 				</div>
 			<% end %>
 		<% end %>
-
-		<div class="creating_resource"> we are creating your resource now, please wait</div>
-
-		<div class="create_resource">New Resource</div>
 	</div>
 
-	<div class="new_resource">
-	<%= render :partial => 'resource/resource_form', 
-			   :locals => {:method => :post, :url => '/resource', :form_id => 'new_resource_form'} %>
+	<div class="sideboard">
+		<div class="inner_banner"><span class='show_mode show_mode_selected'>Annoucement</span></div>
+		<div class="siderboard_content">
+			<% @announcements.each do |a| %>
+				<div class='each_announcement'>
+					<div class='announcement_title'><%= a.title %></div>
+					<div class='announcement_time'><%= a.created_at %></div>
+					<div class='announcement_creator'>by <%= a.creator_name %></div>
+				</div>
+			<% end %>
+		</div>
 	</div>
+
 </div>
 
 

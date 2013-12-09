@@ -6,6 +6,7 @@ class ResourceController < ApplicationController
   
   def index
     @resources = Resource.all
+    @announcements = Announcement.all
   end
 
   def new

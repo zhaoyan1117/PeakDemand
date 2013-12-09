@@ -3,15 +3,14 @@ $(document).ready(function() {
 	var animation_time = 300;
 
 	$('.create_resource').click(function(){
-		$('.index_resource_bg').fadeIn(animation_time)
 		$('.create_resource').fadeOut(animation_time);
 		$('.new_resource').delay(animation_time).fadeIn(animation_time);
 	});
 
-	$('.index_resource_bg').click(function(){
-		$('.index_resource_bg').fadeOut(animation_time)
+	$('.btn_close').click(function(e){
 		$('.new_resource').fadeOut(animation_time);
 		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+	    e.preventDefault();
 	});
 
 	function build_resource_html (resource) {
@@ -32,7 +31,6 @@ $(document).ready(function() {
 
 	$("#new_resource_form").submit(function(e) {
 
-		$('.index_resource_bg').fadeOut(animation_time)
 		$('.new_resource').fadeOut(animation_time);
 		$('.creating_resource').delay(animation_time).fadeIn(animation_time);
 
@@ -50,7 +48,7 @@ $(document).ready(function() {
 	        	var resource_html = build_resource_html(data);
 
 				$('.creating_resource').fadeOut(animation_time);
-				$(resource_html).hide().insertBefore('.create_resource').delay(animation_time).fadeIn(animation_time);
+				$(resource_html).hide().insertAfter('.create_resource').delay(animation_time).fadeIn(animation_time);
         		$('.create_resource').delay(animation_time).fadeIn(animation_time);
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) 

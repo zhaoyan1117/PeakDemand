@@ -5,6 +5,8 @@ class Announcement < ActiveRecord::Base
 
   validates :title, :body, :created_at, :creator_id, :presence => true
 
-
+  def creator_name
+  	creator.name
+  end
 
 end

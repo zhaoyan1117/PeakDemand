@@ -6,21 +6,24 @@
 	</div>
 
 	<div class="new_resource_time">
-		<span>
+		<div>
 			<%= f.label :end_at %>
 			<input id="resource_end_at" name="resource[end_at]" type="date" required="required" value=<%=Date.today%>>
-		</span>
+		</div>
 
-		<span>
+		<div>
 			<%= f.label :available_on %>
 			<input id="resource_start_at" name="resource[start_at]" type="date" required="required" value=<%=Date.today%>>
-		</span>
+		</div>
 	</div>
 	
 	<div class="new_resource_des">
 		<%= f.text_area :description, :placeholder => 'Full Description (optional)'%><br>
 	</div>
 
-	<div class="resource_form_submit"><%= submit_tag "Submit"%></div>
+	<div class="resource_form_btn">
+		<button class="btn_close">Cancel</button>
+		<div class="btn_submit"><%= submit_tag "Submit"%></div>
+	</div>
 
 <% end %>
