@@ -3,6 +3,11 @@ Given(/^user "(.*?)" with email "(.*?)" and password "(.*?)" exsit$/) do |name, 
   User.create!(:name=>name,:email=>email,:password=>password,:password_confirmation=>password)
 end
 
+Given(/^administrator "(.*?)" with email "(.*?)" and password "(.*?)" exist$/) do |name, email,password|
+  #pending # express the regexp above with the code you wish you had
+  User.create!(:name=>name,:email=>email,:password=>password,:password_confirmation=>password,:is_administrator=>true)
+end
+
 Given(/^provider "(.*?)" with email "(.*?)" and password "(.*?)" has signed up$/) do |name, email, password|
   step %{I am on the sign up page}
   step %{I fill in "Name" with "#{name}"}

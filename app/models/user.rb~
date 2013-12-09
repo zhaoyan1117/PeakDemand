@@ -22,7 +22,7 @@ class User < ActiveRecord::Base
   end
 
   def validate_must_have_identity
-    if !is_provider && !is_consumer && !is_administrator
+    if !is_provider && !is_consumer
       errors[:identity] << "must have an identity!"
     end
   end
