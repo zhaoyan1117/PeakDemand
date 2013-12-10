@@ -23,22 +23,19 @@
         <% if resource.demands.empty? %>
             <p> There is no demand on this resource currently!</p>
 
-            <% if user && user.is_consumer %>
-                <%= link_to "Create Demand", new_resource_demand_url(resource) %>
+            <%= content_tag 'div', :class => 'new_demand', :data => {target: '#new_demand_modal', toggle: 'modal'} do %>
+                <span class="new_demand_content">Add a new demand</span>
             <% end %>
 
         <% else %>
 
-            <% if user && user.is_consumer %>
-                <%= link_to new_resource_demand_url(resource) do %>
-                    <div class="new_demand"><span class="new_demand_content">Add a New Demand</span></div>
+            <% if user && user.is_consumer? %>
+                <%= content_tag 'div', :class => 'new_demand', :data => {target: '#new_demand_modal', toggle: 'modal'} do %>
+                    <span class="new_demand_content">Add a new demand</span>
                 <% end %>
             <% end %>
 
-<!--             <%= content_tag 'div', :class => 'new_demand', :data => {target: '#new_demand_modal', toggle: 'modal', url: new_resource_demand_url(resource)} do %>
-                <span class="new_demand_content">Add a new demand</span>
-            <% end %>
- -->
+
             <% resource.demands.each do |d| %>
                 <%= content_tag "div", :class => "each_demand", :id => "demand_#{d.id}", :data => {target: "#show_demand_modal", toggle: "modal", id: d.id, intensity: d.intensity, url: resource_demand_url(resource, d)} do %>
                     <div class="each_demand_1nd">
@@ -60,3 +57,13 @@
         <% end %>
     </div>
 </div>
+
+<% if user && user.is_consumer?  %>
+    <%= render :partial => 'new_demand_modal',
+               :locals => {:intensities => intensities} %>
+
+    <script type="text/javascript">
+        <%= render :partial => 'new_demand',
+                   :formats => [:js]%>
+    </script>
+<% end %>

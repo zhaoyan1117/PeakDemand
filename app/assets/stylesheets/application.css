@@ -610,11 +610,11 @@ a {text-decoration: none !important}
 	color: rgb(130,130,130);
 }
 
-.btn_resource:hover {
+.btn_close:hover,.btn_contact:hover,.btn_resource:hover,.btn_submit:hover {
 	box-shadow: 0px 2px 2px rgba(0,0,0, .2); 
 }
 
-.btn_resource:active {
+.btn_close:active,.btn_contact:active,.btn_resource:active,.btn_submit:active {
 	box-shadow: 0px 1px 2px rgba(0,0,0, .3) inset; 
 }
 
@@ -777,10 +777,76 @@ a {text-decoration: none !important}
 	border-bottom: 1px solid rgb(230,230,230);
 }
 
-.each_demand:hover,.new_demand:hover {
+.new_demand:hover {
+	background-color: rgb(240,240,240);
 	cursor: pointer;
 }
 
+.demand_edit_short {
+	width: 97%;
+}
+
+.demand_edit_time {
+	width: 97%;
+	text-align: right;
+}
+
+.demand_edit_time i {
+	color: rgb(140,140,140);
+	font-style: normal;
+	font-size: .85em;
+	position: relative;
+	top:-5px;
+}
+
+.demand_edit_time input {
+	width: 205px;
+	position: relative;
+}
+
+.demand_edit_time_left {
+	float: left !important;
+}
+
+.demand_edit_time_right {
+	position: relative;
+	float: right !important;
+	left: 14px;
+}
+
+
+.demand_edit_des {
+	width: 97%;
+	height: 70px;
+}
+
+.demand_edit_intens {
+	position: relative;
+	width: 98%;
+	left: .8%;
+	margin-top: -1px;
+	margin-bottom: 15px;
+}
+
+.demand_radio_each {
+}
+
+.demand_edit_intens_each {
+	display: inline-block;
+	width: 24%;
+}
+
+.demand_edit_intens_each label {
+	display: inline-block;
+}
+
+.demand_edit_intens_each i {
+	font-style: normal;
+	position: relative;
+	top: 3px;
+	left: 3px;
+	font-size: .85em;
+}
 
 .each_demand_content i {
 	font-style: normal;
@@ -874,6 +940,27 @@ a {text-decoration: none !important}
 	padding: 10px;
 }
 
+.btn_demand {
+	display: inline-block;
+	position: relative;
+	float: right;
+	margin-right: 10px;
+	top: -3px;
+}
+
+.btn_edit_demand {
+	width: 75px;
+	height: 28px;
+	margin: 0px;
+}
+
+.btn_delete_demand {
+	width: 75px;
+	height: 28px;
+	margin: 0px;
+	margin-right: 5px;	
+}
+
 .close {
 	position: relative;
 	top: -4px;
@@ -948,4 +1035,36 @@ a {text-decoration: none !important}
 	float: right;
 	width: 90px !important;
 	border-radius: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.each_user {
+	background: rgb(254,254,254);
+	padding: 5px;
+	border-radius: 2px;
+	box-shadow: 0px 1px 2px rgba(140,140,140, .6);
+	width:100%;
+	margin-right: auto;
+
+	height: 36px;
+
+	margin-bottom: 10px;
 }

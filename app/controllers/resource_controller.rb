@@ -23,6 +23,7 @@ class ResourceController < ApplicationController
   def show
     @calendar_xml_feed = @resource.get_xml_feed
     @cgi_cal_id = @resource.get_cgi_calendar_id
+    @intensities = Demand::INTENSITIES
   end
 
   def update
