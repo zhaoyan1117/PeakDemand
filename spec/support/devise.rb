@@ -12,6 +12,12 @@ module DeviseHelper
     sign_in @user
   end
 
+  def login_admin
+    @request.env["devise.mapping"] = Devise.mappings[:user]
+    @user = FactoryGirl.create(:user, :is_provider => true, :is_consumer => true, :is_administrator => true)
+    sign_in @user
+  end
+
   def log_out
     sign_out :user
   end

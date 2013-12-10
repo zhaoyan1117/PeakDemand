@@ -1001,6 +1001,7 @@ a {text-decoration: none !important}
 	width: 75px;
 	height: 28px;
 	margin: 0px;
+	display: none;
 }
 
 .btn_delete_demand {
@@ -1008,6 +1009,7 @@ a {text-decoration: none !important}
 	height: 28px;
 	margin: 0px;
 	margin-right: 5px;	
+	display: none;
 }
 
 .close {

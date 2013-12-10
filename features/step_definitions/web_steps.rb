@@ -58,6 +58,18 @@ When /^(?:|I )follow "([^"]*)"$/ do |link|
   click_link(link)
 end
 
+When(/^I choose "(.*?)" with in "(.*?)"$/) do |value, selector|
+  within (selector) do
+    step %{I choose "#{value}"}
+  end
+end
+
+Then(/^I press "(.*?)" with in "(.*?)"$/) do |value, selector|
+  within (selector) do
+    step %{I press "#{value}"}
+  end
+end
+
 When /^(?:|I )push the selector "([^"]*)"$/ do |selector|
   find(selector).click
 end

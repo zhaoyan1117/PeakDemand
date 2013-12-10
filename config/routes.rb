@@ -16,9 +16,8 @@ PeakDemand::Application.routes.draw do
   post '/mail/provider' => 'UserMailer#send_email_provider', :as => :mail_provider
 
   # admin & announcement
-  get 'admin/index' => 'Admin#index'
-  post 'admin/enable_user' => 'Admin#enable_user'
-  post 'admin/disable_user' => 'Admin#disable_user'
+  get 'admin/index' => 'admin#index'
+  get 'admin/enable_user/:user_id' => 'admin#enable_user', :as => 'admin_enable'
   resources :announcement, :except => [:index, :new, :edit]
 
   # resource & demand

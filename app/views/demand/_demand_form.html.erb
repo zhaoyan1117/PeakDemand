@@ -1,6 +1,6 @@
-<%= form_for :demand, :method => method, :url => url do |f|  %>
+<%= form_for :demand, :method => method, :url => url, :html => {:class => 'demand_form'} do |f|  %>
 
-	<%= f.text_field :short_description, :placeholder=>"Short Description", :class=>"demand_edit_short", :required=>"required" %><br>
+	<%= f.text_field :short_description, :placeholder=>"Short Description", :class=>"demand_edit_short" %><br>
 	<div class="demand_edit_time">
 		<span class="demand_edit_time_left">
 			<i>from</i>
@@ -10,7 +10,6 @@
 			<i>to</i>
 			<input id="demand_end_at" name="demand[end_at]" type="date" value=<%=Date.today%>>
 		</span>
-		
 	</div>
 		
 	<%= f.text_area :description, :placeholder=>"Description (optional)", :class=>"demand_edit_des"%><br>

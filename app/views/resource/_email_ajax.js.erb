@@ -1,6 +1,10 @@
 $(document).ready(function() {
 	$(".msg_form").submit(function(e) {
 
+		$('#notice_msg').text('Your email has been sent.');
+		$('#notice_msg').fadeIn(300);
+		$('#notice_msg').delay(3000).fadeOut(300);
+
 		$(this).parent().parent().parent().parent().modal('toggle')
 
 	    var postData = $(this).serializeArray();

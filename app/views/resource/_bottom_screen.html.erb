@@ -60,10 +60,28 @@
 
 <% if user && user.is_consumer?  %>
     <%= render :partial => 'new_demand_modal',
-               :locals => {:intensities => intensities} %>
+               :locals => {
+                    :intensities => intensities,
+                    :resource => resource
+                } %>
 
-    <script type="text/javascript">
-        <%= render :partial => 'new_demand',
-                   :formats => [:js]%>
-    </script>
 <% end %>
+
+<%= render :partial => 'edit_demand_modal',
+           :locals => {
+                :intensities => intensities,
+                :resource => resource
+            } %>
+
+<script type="text/javascript">
+    <%= render :partial => 'edit_demand',
+               :formats => [:js]%>
+</script>
+
+
+
+
+
+
+
+

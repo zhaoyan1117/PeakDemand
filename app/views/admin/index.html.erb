@@ -1,2 +1,15 @@
-<%= render 'shared/user_header' %>
-<%= render 'shared/error' %>
+<%= render :partial => 'shared/user_header', :locals => {:user => @user} %>
+<%= render :partial => 'shared/flash', :locals => {:flash => flash} %>
+
+
+<div class="content">
+	<div class='inner_banner'></div>
+	<div class="dashboard">
+		<% @unapproved_users.each do |u| %>
+			<%= link_to admin_enable_url(u) do %>
+			 	<div class="each_user"><%= u.name %> <%= u.email %> <b>Click to enable</b></div> 
+			<% end %>
+		<% end %>
+	</div>
+</div>
+

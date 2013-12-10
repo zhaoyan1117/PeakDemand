@@ -23,22 +23,6 @@ describe User do
     u2.errors.messages.should include(:email)
   end
 
-  it "should have an identity" do
-    @u1.is_provider = nil
-    @u1.is_consumer = nil
-    @u1.valid?.should be_false
-    @u1.errors.messages.should include(:identity)
-  end
-
-  describe "identity" do
-    it "should return the identity of the user" do
-      @u1.is_consumer = true
-      @u1.is_provider = true
-      @u1.identity.should include("Provider")
-      @u1.identity.should include("Consumer")
-    end
-  end
-
   after :each do
     @u1.destroy rescue true
   end

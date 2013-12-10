@@ -6,8 +6,12 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         
         <span class="btn_demand">
+
           <button class="btn_resource btn_edit btn_edit_demand">Edit</button>
-          <button class="btn_resource btn_delete btn_delete_demand">Delete</button>
+          
+          <%= link_to resource_url(resource), :method => :delete, :confirm => 'Are you sure to delete this demand?' do %>
+            <button class="btn_resource btn_delete btn_delete_demand">Delete</button>
+          <% end %>
         </span>
 
         <span class="modal-title demand_short_description" id="show_demand_modal_label"></span> <span class="demand_consumer_name"></span>
@@ -30,11 +34,6 @@
               <%= f.text_area :body, :class=> 'msg_body', :placeholder=> 'Send a message to the consumer'%>
             <%= submit_tag "Send", :class => 'send_button btn_contact' %>
           <% end %>
-    
-        <% else %>
-          <div class="login_in_demand_modal">
-            Login to email the consumer
-          </div>
         <% end %>
 
       </div>
@@ -45,5 +44,6 @@
 
 <script type="text/javascript">
     <%= render :partial => 'show_demand',
-               :formats => [:js] %>
+               :formats => [:js],
+               :locals => {:user => user} %>
 </script>

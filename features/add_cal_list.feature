@@ -11,7 +11,7 @@ Scenario: Click to copy the calendar id for a resource by a guest user
   | R1   |2013-10-26|2014-12-26|
   When I follow "Log Out"
   When I am on the resource detail page of "R1"
-  Then I should see "Demand Calendar Copy"
+  Then I should see "Demand Calendar"
 
 Scenario: Click to copy the calendar id for a resource by a provider
   Given provider "p1" with email "p1@p1.com" and password "password" has signed up
@@ -19,7 +19,7 @@ Scenario: Click to copy the calendar id for a resource by a provider
   | name | start_at | end_at   |
   | R1   |2013-10-26|2014-12-26|
   When I am on the resource detail page of "R1"
-  Then I should see "Demand Calendar Copy"
+  Then I should see "Demand Calendar"
 
 Scenario: Click to copy the calendar id for a resource by a consumer
   Given provider "p1" with email "p1@p1.com" and password "password" has signed up
@@ -29,4 +29,4 @@ Scenario: Click to copy the calendar id for a resource by a consumer
   When I follow "Log Out"
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up 
   When I am on the resource detail page of "R1"
-  Then I should see "Demand Calendar Copy"
+  Then I should see "Demand Calendar"

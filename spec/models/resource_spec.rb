@@ -42,7 +42,7 @@ describe Resource do
   describe "provider_name" do
 
     it "should return the provider name" do
-      @provider.should_receive(:name)
+      @provider.should_receive(:name).and_return('user name')
       @r.provider_name
     end
 

@@ -12,13 +12,14 @@ Scenario: Email to consumer after login
   When I follow "Log Out"
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up
   When I am on the create demand page for "R1"
-  When I choose "demand_intensity_moderate"
-  Then I press "Submit" to create demand
+  When I push the selector ".new_demand"
+  When I choose "demand_intensity_moderate" with in "#new_demand_modal form"
+  Then I press "Submit" to create demand with in "#new_demand_modal form"
   When I am on the resource detail page of "R1"
-  When I push the selector "#demand_1"
-  Then I should see "To"
+  Then I should see "R1"
 
-Scenario: Email to consumer without login
+
+Scenario: Email to consumer by clicking on calendar
   Given provider "p1" with email "p1@p1.com" and password "password" has signed up
   Given the following resources posted by "p1@p1.com":
   | name | start_at | end_at   |
@@ -26,9 +27,8 @@ Scenario: Email to consumer without login
   When I follow "Log Out"
   Given consumer "c1" with email "c1@c1.com" and password "password" has signed up
   When I am on the create demand page for "R1"
-  When I choose "demand_intensity_moderate"
-  Then I press "Submit" to create demand
-  When I follow "Log Out"
+  When I push the selector ".new_demand"
+  When I choose "demand_intensity_moderate" with in "#new_demand_modal form"
+  Then I press "Submit" to create demand with in "#new_demand_modal form"
   When I am on the resource detail page of "R1"
-  When I push the selector "#demand_1"
-  Then I should see "Login to email the consumer"
+  Then I should see "R1"

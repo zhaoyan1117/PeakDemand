@@ -1,5 +1,4 @@
-<%= render 'shared/user_header' %>
-
+<%= render :partial => 'shared/user_header', :locals => {:user => @user} %>
 <%= render :partial =>'shared/flash', :locals => {:flash => flash} %>
 
 <div class="content">

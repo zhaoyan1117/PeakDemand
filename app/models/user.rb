@@ -25,6 +25,16 @@ class User < ActiveRecord::Base
     is_administrator
   end
 
+  def self.find_unapproved_users
+    User.where(:approved => nil, :is_administrator => nil)
+  end
+
+  def self.approve u
+    user = User.find u
+    user.approved = true
+    user
+  end
+
   def validate_must_have_identity
     if !is_provider && !is_consumer && !is_administrator
       errors[:identity] << "must have an identity!"

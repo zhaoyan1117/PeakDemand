@@ -1,5 +1,4 @@
-<%= render 'shared/user_header' %>
-
+<%= render :partial => 'shared/user_header', :locals => {:user => @user} %>
 <%= render :partial =>'shared/flash', :locals => {:flash => flash} %>
 
 <%= render :partial => 'top_screen',
@@ -18,7 +17,7 @@
            } %>
 
 <%= render :partial => 'show_demand_modal',
-           :locals => { :user => @user } %>
+           :locals => { :user => @user, :resource => @resource } %>
 
 <script type="text/javascript">
   <%= render :partial => 'email_ajax',

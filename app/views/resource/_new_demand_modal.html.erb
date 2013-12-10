@@ -8,8 +8,8 @@
       <div class="modal-body">
         <%= render :partial => 'demand/demand_form',
                    :locals => {:method => :post, 
-                   :url => resource_demand_index_url(@resource),
-                   :intensities => intensities} %>
+                               :url => resource_demand_index_url(resource),
+                               :intensities => intensities }%>
         </div>
     </div>
   </div>

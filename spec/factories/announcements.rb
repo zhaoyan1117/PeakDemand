@@ -5,6 +5,6 @@ FactoryGirl.define do
     title "MyString"
     body "MyText"
     created_at "2013-12-08"
-    user nil
+    creator {FactoryGirl.build :user, :is_administrator => true}
   end
 end

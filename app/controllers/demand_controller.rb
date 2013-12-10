@@ -8,15 +8,15 @@ class DemandController < ApplicationController
   def create
     d = Demand.new params["demand"].merge("consumer" => @user, "resource" => @resource)
     
-    if !d.save
-      flash[:error] = d.errors.full_messages
+    if d.save
+      render :json => d
+    else
+      render :json => {:error => d.errors.full_messages}
     end
-    
-    redirect_to resource_url(@resource)
   end
 
   def show
-    render :json => @demand, :include => :consumer
+    render :json => @demand, :include => [:consumer, :resource]
   end
 
   def get_demand_from_gcal_id
@@ -26,9 +26,9 @@ class DemandController < ApplicationController
   
   def update
     if @demand.update_attributes params["demand"].merge("consumer" => @user, "resource" => @resource)
-      redirect_to resource_demand_url(@resource, @demand)
+      render :json => @demand
     else
-      redirect_to edit_resource_demand_url(@resource, @demand)
+      render :json => {:error => @demand.errors.full_messages}
     end
   end
 
