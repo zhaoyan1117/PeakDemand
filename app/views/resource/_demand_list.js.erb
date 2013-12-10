@@ -1,0 +1,31 @@
+$(document).ready(function() {
+	$('.each_demand').hover(function(){
+		var event_id = '.event_' + $(this).data('id');
+		$(this).css({
+			'background-color' : 'rgb(242,242,242)'
+		})
+		$(event_id).css('background-color', 'rgb(160,160,160)');
+	},
+	function(){
+		var event_id = '.event_' + $(this).data('id');
+		$(this).css({
+			'background-color' : 'white'
+		})
+		switch ($(this).data('intensity')) {
+			case 'LIGHT':
+				$(event_id).css('background-color', '#7ED321');
+				break;
+			case 'MODERATE':
+				$(event_id).css('background-color', '#FFE100');
+				break;
+			case 'HEAVY':
+				$(event_id).css('background-color', '#F9A130');
+				break;
+			case 'OCCUPY':
+				$(event_id).css('background-color', '#D0021B');
+				break;
+			default:
+				break;
+		}
+	});
+});

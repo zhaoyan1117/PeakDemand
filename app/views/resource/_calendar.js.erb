@@ -4,13 +4,72 @@ $(document).ready(function() {
             "<%= calendar_xml_feed %>"
         ),
 		eventClick: function(calEvent, jsEvent, view) {
-	        alert('Event: ' + calEvent.title);
-	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
-	        alert('View: ' + view.name);
-
-	        // change the border color just for fun
-	        $(this).css('border-color', 'red');
+			$('#demand_'+calEvent.demand_id).trigger( "click" );
 			return false;
-		}
+		},
+		eventMouseover: function(event, jsEvent, view) { 
+			var demand_id = '#demand_' + event.demand_id;
+			var event_id = '.event_' + event.demand_id;
+			$(demand_id).css('background-color', 'rgb(242,242,242)');
+			$(event_id).css('background-color', 'rgb(160,160,160)');
+		},
+		eventMouseout: function(event, jsEvent, view) { 
+			var demand_id = '#demand_' + event.demand_id;
+			var event_id = '.event_' + event.demand_id;
+			$(demand_id).css('background-color', 'white');
+			switch (event.intensity) {
+				case 'LIGHT':
+					$(event_id).css('background-color', '#7ED321');
+					break;
+				case 'MODERATE':
+					$(event_id).css('background-color', '#FFE100');
+					break;
+				case 'HEAVY':
+					$(event_id).css('background-color', '#F9A130');
+					break;
+				case 'OCCUPY':
+					$(event_id).css('background-color', '#D0021B');
+					break;
+				default:
+					break;
+			}
+		},
+	    eventRender: function(event, element) {
+		    var feed_url = "<%= resource_demand_index_url(resource) %>"
+			var intensity = event.title.split(/ (.+)/)[0]
+			var title = event.title.split(/ (.+)/)[1]
+			element.css('border', '0px');
+			switch (intensity) {
+				case '[LIGHT]':
+					element.css('background-color', '#7ED321');
+					break;
+				case '[MODERATE]':
+					element.css('background-color', '#FFE100');
+					break;
+				case '[HEAVY]':
+					element.css('background-color', '#F9A130');
+					break;
+				case '[OCCUPY]':
+					element.css('background-color', '#D0021B');
+					break;
+				default:
+					break;
+			}
+		    $.ajax({
+		        url : feed_url + '/' + event.id.split('@')[0] + '/get_demand_from_gcal_id',
+		        type: "GET",
+		        dataType : 'json',
+		        success:function(data, textStatus, jqXHR) 
+		        {
+		        	event.demand_id = data.id;
+		        	event.intensity = data.intensity;
+		        	element.children().addClass('event_' + data.id);
+		        },
+		        error: function(jqXHR, textStatus, errorThrown) 
+		        {
+		        	alert('error');	
+		        }
+		    });
+    	}
     });
 });

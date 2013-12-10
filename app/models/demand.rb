@@ -19,6 +19,10 @@ class Demand < ActiveRecord::Base
   	consumer.name
   end
 
+  def self.find_from_event_id(resource, e_id)
+    find_by_event_id "#{resource.cal_id}/private/full/#{e_id}"  
+  end
+
   private
 
   def validate_date_range_should_be_in_resource_date_range

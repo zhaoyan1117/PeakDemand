@@ -10,9 +10,12 @@
         <script type="text/javascript">
             <%= render :partial => 'calendar',
                        :formats => [:js],
-                       :locals => {:calendar_xml_feed => calendar_xml_feed} %>
+                       :locals => {:calendar_xml_feed => calendar_xml_feed,
+                                   :resource => resource }%>
         </script>
+    
     </div>
+
 
     <div class="right_screen">
         <h3 class="detail_rsrc_sec">Demand List</h3>
@@ -37,12 +40,16 @@
             <% end %>
  -->
             <% resource.demands.each do |d| %>
-                <%= content_tag "div", :class => "each_demand", :id => "demand_#{d.id}", :data => {target: "#show_demand_modal", toggle: "modal", id: d.id, url: resource_demand_url(resource, d)} do %>
+                <%= content_tag "div", :class => "each_demand", :id => "demand_#{d.id}", :data => {target: "#show_demand_modal", toggle: "modal", id: d.id, intensity: d.intensity, url: resource_demand_url(resource, d)} do %>
                     <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
                     <span class="each_demand_content"><span class="each_demand_intensity <%= d.intensity %>_color"><%= d.intensity %></span></span>
                     <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
                 <% end %>
             <% end %>
+            <script type="text/javascript">
+                <%= render :partial => 'demand_list',
+                           :formats => [:js] %>
+            </script>
         <% end %>
     </div>
 </div>
