@@ -50,3 +50,8 @@
     <%= render :partial => 'resource_modif',
                :formats => [:js] %>
 </script>
+
+<% unless user && user == resource.provider %>
+	<%= render :partial => 'email_provider_modal',
+		       :locals => { :resource => @resource } %>
+<% end %>

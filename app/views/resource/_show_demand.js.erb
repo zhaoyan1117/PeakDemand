@@ -18,16 +18,15 @@ $('.each_demand').click(function() {
     $(".demand_start_at").text(demand.start_at);
     $(".demand_end_at").text(demand.end_at);
     $(".demand_consumer_name").text("by " + demand.consumer.name);
-    $(".demand_consumer_email").val(demand.consumer.email);
+    $("#demand_consumer_email").val(demand.consumer.email);
     $('#mail_demand_id').val(demand.id);
   });
 });
-
-// Auto resize text area.
-$('.demand_consumer_msg').autosize();
 
 // Login in to email. TODO: replace with real login modal/dropdown.
 $('.login_in_demand_modal').click(function() {
   $('#show_demand_modal').modal('toggle');
   $('#new_demand_modal').modal('toggle');
 });
+
+$('.msg_body').autosize();

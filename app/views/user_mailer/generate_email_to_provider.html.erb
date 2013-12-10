@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    Reply to this email will be sent to <%= @sender_name%>(<%= @sender_email %>)
+    <br>
+    <br>
+    <h4>
+      You have received a message from <%= @sender_name%>(<%= @sender_email%>) regarding <%= link_to @resource_name, @resource_link %> available from <%= @demand_start%> to <%= @demand_end%>.
+    </h4>
+    <hr>    
+    <h4>
+      Send from: <%= @sender_name %>(<%= @sender_email%>)
+    </h4>
+    <p> 
+      <%= @body %><br/>
+    </p>
+  </body>
+</html>

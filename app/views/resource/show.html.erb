@@ -15,7 +15,9 @@
            } %>
 
 <%= render :partial => 'show_demand_modal',
-		       :locals => { :user => @user } %>
+           :locals => { :user => @user } %>
 
-<%= render :partial => 'email_provider_modal',
-           :locals => { :resource => @resource } %>
+<script type="text/javascript">
+  <%= render :partial => 'email_ajax',
+             :formats => [:js] %>
+</script>
