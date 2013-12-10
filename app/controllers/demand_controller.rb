@@ -1,7 +1,7 @@
 class DemandController < ApplicationController
 
-  before_filter :authenticate_user!, :except => [:show]
-  before_filter :get_demand, :except => [:new, :create]
+  before_filter :authenticate_user!, :except => [:show, :get_demand_from_gcal_id]
+  before_filter :get_demand, :except => [:new, :create, :get_demand_from_gcal_id]
   before_filter :get_resource
   before_filter :get_current_user
 
@@ -28,6 +28,11 @@ class DemandController < ApplicationController
     render :json => @demand, :include => :consumer
   end
 
+  def get_demand_from_gcal_id
+    d = Demand.find_from_event_id(@resource, params[:id])
+    render :json => d, :include => :consumer
+  end
+  
   def edit
     get_intensities
   end

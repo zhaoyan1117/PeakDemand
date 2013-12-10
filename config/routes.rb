@@ -23,7 +23,11 @@ PeakDemand::Application.routes.draw do
 
   # resource & demand
   resources :resource, :except => [:new, :edit] do
-    resources :demand, :except => :index
+    resources :demand, :except => :index do
+      member do
+        get :get_demand_from_gcal_id, :as => 'gcal_id_to_demand'
+      end
+    end
   end
 
 end
