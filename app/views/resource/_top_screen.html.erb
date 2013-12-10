@@ -23,8 +23,14 @@
 					<%= link_to resource_url(resource), :method => :delete, :confirm => 'Are you sure to delete your resource?' do %>
 						<button class="btn_resource btn_delete">Delete</button>
 					<% end %>
+
+			        <script type="text/javascript">
+			            <%= render :partial => 'edit_resource',
+			                       :formats => [:js] %>
+			        </script>
+
 				<% else %>
-					<button class="btn_resource btn_contact" data-toggle="modal" data-target="#email_provider_modal">
+					<button class="btn_resource btn_contact <%= (@user && '') || 'btn_disable' %>" data-toggle="modal" data-target="#email_provider_modal">
 						<%= image_tag "email.png"%><%=resource.provider_name%>
 					</button>
 				<% end %>

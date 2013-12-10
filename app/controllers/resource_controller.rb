@@ -15,8 +15,7 @@ class ResourceController < ApplicationController
     if r.save
       render :json => r.attributes.merge({:url => resource_url(r), :provider_name => r.provider_name})
     else
-      flash[:error] = r.errors.full_messages
-      redirect_to resource_index_url
+      render :json => {:errors => r.errors.full_messages}
     end
   end
 
@@ -27,10 +26,9 @@ class ResourceController < ApplicationController
 
   def update
     if @resource.update_attributes params["resource"].merge("provider" => @user)
-      redirect_to resource_url(@resource)
-      # TODO: change to render json.
+      render :json => @resource.attributes
     else
-      redirect_to resource_url(@resource)
+      render :json => {:errors => @resource.errors.full_messages}
     end
   end
 

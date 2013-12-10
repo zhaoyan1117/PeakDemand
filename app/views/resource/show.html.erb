@@ -1,5 +1,7 @@
 <%= render 'shared/user_header' %>
 
+<%= render :partial =>'shared/flash', :locals => {:flash => flash} %>
+
 <%= render :partial => 'top_screen',
            :locals => {
                 :resource => @resource,

@@ -1,0 +1,23 @@
+<div class="alert_banner">
+	<div class="alert_msg error_msg" id='error_msg'>
+		<%= flash[:error] if flash[:error] %>
+	</div>
+
+	<div class="alert_msg notice_msg" id='notice_msg'>
+		<%= flash[:notice] if flash[:notice] %>
+	</div>
+</div>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		if ($('#notice_msg').text().trim() != '') {
+			$('#notice_msg').fadeIn(300);
+			$('#notice_msg').delay(3000).fadeOut(300);
+		};	
+
+		if ($('#error_msg').text().trim() != '') {
+			$('#error_msg').fadeIn(300);
+			$('#error_msg').delay(3000).fadeOut(300);
+		};	
+	});
+</script>

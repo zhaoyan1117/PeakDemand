@@ -5,15 +5,6 @@ class DemandController < ApplicationController
   before_filter :get_resource
   before_filter :get_current_user
 
-  def new
-    unless @user.is_consumer
-      flash[:error] = ["Please register as a consumer to create demand!"]     
-      redirect_to resource_url(@resource)
-    end
-
-    get_intensities
-  end
-
   def create
     d = Demand.new params["demand"].merge("consumer" => @user, "resource" => @resource)
     
@@ -33,10 +24,6 @@ class DemandController < ApplicationController
     render :json => d, :include => :consumer
   end
   
-  def edit
-    get_intensities
-  end
-
   def update
     if @demand.update_attributes params["demand"].merge("consumer" => @user, "resource" => @resource)
       redirect_to resource_demand_url(@resource, @demand)
@@ -58,10 +45,6 @@ class DemandController < ApplicationController
 
   def get_resource
     @resource = Resource.find(params[:resource_id])
-  end
-
-  def get_intensities
-    @intensities = Demand::INTENSITIES
   end
 
 end

@@ -1,0 +1,47 @@
+$(document).ready(function() {
+
+	$("#edit_resource_form").submit(function(e) {
+
+		$('.screen_edit').fadeOut(200);
+		$('.screen').delay(200).fadeIn(200);
+
+	    postData = $(this).serializeArray();
+	    formURL = $(this).attr("action");
+
+	    $.ajax(
+	    {
+	        url : formURL,
+	        type: "POST",
+	        data : postData,
+	        dataType : 'json',
+	        success:function(data, textStatus, jqXHR) 
+	        {
+	        	if (data.errors == [] || data.errors == null) {
+	        		$('#notice_msg').text('Resource Updated!');
+	        		$('#notice_msg').fadeIn(300);
+	        		$('#notice_msg').delay(3000).fadeOut(300);
+	        	
+	        		$('#detail_rsrc_name').text(data.name);
+	        		$('#detail_rsrc_sub p').text(data.short_description);
+	        		$('#detail_rsrc_bottom p').text(data.description);
+	        		$($('.detail_availablity p')[0]).text(data.start_at);
+	        		$($('.detail_availablity p')[1]).text(data.end_at);
+	        	} else {
+	        		$('#error_msg').text(data.errors);
+	        		$('#error_msg').fadeIn(300);
+	        		$('#error_msg').delay(3000).fadeOut(300);
+	        	}
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) 
+	        {
+        		d = errorThrown;
+        		$('#error_msg').text('Error!');
+        		$('#error_msg').fadeIn(300);
+        		$('#error_msg').delay(3000).fadeOut(300);
+	        }
+	    });
+
+	    e.preventDefault();
+	});
+	 
+});

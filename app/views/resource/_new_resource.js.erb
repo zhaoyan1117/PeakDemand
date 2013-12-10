@@ -45,15 +45,32 @@ $(document).ready(function() {
 	        dataType : 'json',
 	        success:function(data, textStatus, jqXHR) 
 	        {
-	        	var resource_html = build_resource_html(data);
+	        	if (data.errors == []) {
+		        	var resource_html = build_resource_html(data);
 
-				$('.creating_resource').fadeOut(animation_time);
-				$(resource_html).hide().insertAfter('.create_resource').delay(animation_time).fadeIn(animation_time);
-        		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+					$('.creating_resource').fadeOut(animation_time);
+					$(resource_html).hide().insertAfter('.new_resource').delay(animation_time).fadeIn(animation_time);
+	        		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+
+	        		$('#notice_msg').text('Resource Created!');
+	        		$('#notice_msg').fadeIn(300);
+	        		$('#notice_msg').delay(3000).fadeOut(300);
+	        	} else {
+					$('.creating_resource').fadeOut(animation_time);
+	        		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+	        		$('#error_msg').text(data.errors);
+	        		$('#error_msg').fadeIn(300);
+	        		$('#error_msg').delay(3000).fadeOut(300);
+	        	}
+
 	        },
 	        error: function(jqXHR, textStatus, errorThrown) 
 	        {
-	        	alert('error');	
+				$('.creating_resource').fadeOut(animation_time);
+        		$('.create_resource').delay(animation_time).fadeIn(animation_time);
+        		$('#error_msg').text('Error!');
+        		$('#error_msg').fadeIn(300);
+        		$('#error_msg').delay(3000).fadeOut(300);
 	        }
 	    });
 

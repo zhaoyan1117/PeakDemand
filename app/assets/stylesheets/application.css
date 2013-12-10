@@ -184,6 +184,49 @@ a {text-decoration: none !important}
 	user-select: none;
 }
 
+.alert_banner {
+	position: fixed;
+	top: 55px;
+	width: 100%;
+	text-align: center;
+	height: auto;
+	z-index: 10000;
+}
+
+.alert_msg {
+	display: none;
+	width: 80%;
+	border-radius: 2px;
+	margin: 5px 10%;
+	padding: 6px;
+}
+
+.error_msg {
+	background-color: rgba(255,102,102,.2);
+	color: #b24747;
+	border: 1px solid #b24747;
+}
+
+.notice_msg {
+	background-color: rgba(0,229,0,.2);
+	color: #008900;
+	border: 1px solid #008900;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .content {
 	margin-top: 52px;
@@ -620,6 +663,12 @@ a {text-decoration: none !important}
 
 .btn_contact {
 	width: 90%;
+}
+
+.btn_disable {
+	background-color: rgb(252,252,252);
+	color: rgb(180,180,180);
+	border: 1px solid rgb(160,160,160);
 }
 
 .btn_contact img {
