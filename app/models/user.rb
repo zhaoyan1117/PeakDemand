@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
     is_provider
   end
 
+  def is_consumer?
+    is_consumer
+  end
+
   def is_admin?
     is_administrator
   end
