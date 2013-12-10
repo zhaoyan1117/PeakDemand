@@ -19,6 +19,7 @@ $('.each_demand').click(function() {
     $(".demand_end_at").text(demand.end_at);
     $(".demand_consumer_name").text("by " + demand.consumer.name);
     $(".demand_consumer_email").val(demand.consumer.email);
+    $('#mail_demand_id').val(demand.id);
   });
 });
 

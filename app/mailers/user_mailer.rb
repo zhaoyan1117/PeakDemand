@@ -1,22 +1,19 @@
 class UserMailer < ActionMailer::Base
-  default :from => "peakdemand.saas@gmail.com"#"from@example.com"
+  default :from => "peakdemand.saas@gmail.com"
 
-  def generate_email(user,subject,to,body,sender,demand,url)
-  	@body = body
-  	@sender_name = sender.name
-  	@sender_email = sender.email
-
+  def send_to_consumer(user, mail, demand, resource_url)
+  	@body = mail[:body]
+    @sender_name = user.name
+  	@sender_email = user.email
   	@demand_start = demand.start_at
   	@demand_end = demand.end_at
-  	resource = demand.resource
-  	@resource_name = resource.name
-  	@resource_link = url
-    mail(:reply_to  => user.email, 
-    	 :to => to, 
-    	 :subject => subject,) do |format|
-    	format.html {render "generate_email"}
-    end
+  	@resource_name = demand.resource.name
+  	@resource_link = resource_url
 
-    #red
+    mail(:reply_to  => @sender_email, 
+    	:to => mail[:to], 
+    	:subject => "[PeakDemand] about #{@resource_name}",) do |format|
+        format.html {render "generate_email"}
+      end
   end
 end

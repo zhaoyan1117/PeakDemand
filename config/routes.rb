@@ -12,7 +12,8 @@ PeakDemand::Application.routes.draw do
   end
 
   # mailing
-  post '/mail/send' => 'UserMailer#send_email', :as => :mail_send
+  post '/mail/consumer' => 'UserMailer#send_email_consumer', :as => :mail_consumer
+  post '/mail/provider' => 'UserMailer#send_email_provider', :as => :mail_provider
 
   # admin & announcement
   get 'admin/index' => 'Admin#index'
@@ -21,7 +22,7 @@ PeakDemand::Application.routes.draw do
   resources :announcement, :except => [:index, :new, :edit]
 
   # resource & demand
-  resources :resource do
+  resources :resource, :except => [:new, :edit] do
     resources :demand, :except => :index
   end
 

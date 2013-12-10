@@ -15,8 +15,7 @@
            } %>
 
 <%= render :partial => 'show_demand_modal',
-		   :locals => {
-		   		:user => @user
-		   } %>
+		       :locals => { :user => @user } %>
 
-<%= render :partial => 'new_demand_modal' %>
+<%= render :partial => 'email_provider_modal',
+           :locals => { :resource => @resource } %>

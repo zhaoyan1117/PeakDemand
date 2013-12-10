@@ -18,8 +18,9 @@
         <br>
     
         <% if user %>
-          <%= form_for :mail, :method => :post, :url => "/mail/send", :html => {:class => 'msg_form'} do |f|  %>
+          <%= form_for :mail, :method => :post, :url => mail_consumer_url, :html => {:class => 'msg_form'} do |f|  %>
               <%= f.label :To %>
+              <%= f.hidden_field :demand_id %>
               <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email' %><br/>
               <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
             <%= submit_tag "Send", :class => 'send_button' %>

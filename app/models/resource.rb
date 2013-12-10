@@ -12,7 +12,14 @@ class Resource < ActiveRecord::Base
   before_create :create_calendar
 
   def provider_name
-    provider.name
+    names = provider.name.split(' ')
+    if names[1]
+      result = names[0][0,8]
+      result += ' ' + names[1][0,1]
+    else
+      result = names[0][0,10]
+    end
+    result
   end
 
   def is_my_resource? user

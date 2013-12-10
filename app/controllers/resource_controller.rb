@@ -9,13 +9,6 @@ class ResourceController < ApplicationController
     @announcements = Announcement.all
   end
 
-  def new
-    unless @user.is_provider
-      flash[:error] = ["Please register as a provider to create resource!"]      
-      redirect_to resource_index_url
-    end
-  end
-
   def create
     r = Resource.new params["resource"].merge("provider" => @user)
 
@@ -23,7 +16,7 @@ class ResourceController < ApplicationController
       render :json => r.attributes.merge({:url => resource_url(r), :provider_name => r.provider_name})
     else
       flash[:error] = r.errors.full_messages
-      redirect_to new_resource_url
+      redirect_to resource_index_url
     end
   end
 
@@ -32,14 +25,12 @@ class ResourceController < ApplicationController
     @cgi_cal_id = @resource.get_cgi_calendar_id
   end
 
-  def edit
-  end
-
   def update
     if @resource.update_attributes params["resource"].merge("provider" => @user)
       redirect_to resource_url(@resource)
+      # TODO: change to render json.
     else
-      redirect_to edit_resource_url(@resource)
+      redirect_to resource_url(@resource)
     end
   end
 
