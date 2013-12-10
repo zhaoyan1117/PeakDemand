@@ -810,7 +810,7 @@ a {text-decoration: none}
 .msg_form {
 	margin: 0px;
 }
-.demand_consumer_msg {
+.msg_body {
 	width: 97.5%;
 	height: 20px;
 	max-width: 97.5%;

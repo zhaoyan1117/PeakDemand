@@ -9,8 +9,9 @@
 
       <%= form_for :mail, :method => :post, :url => mail_provider_url, :html => {:class => 'msg_form'} do |f|  %>
         <%= f.label :To %>
-        <%= f.text_field :to, readonly: true, :class => 'demand_consumer_email', :value => resource.provider.email %><br/>
-        <%= f.text_area :body, :class=> 'demand_consumer_msg', :placeholder=> 'Send a message to the consumer'%>
+        <%= f.hidden_field :resource_id, :value => resource.id %>
+        <%= f.text_field :to, readonly: true, :class => 'msg_email', :value => resource.provider.email %><br/>
+        <%= f.text_area :body, :class=> 'msg_body', :placeholder=> 'Send a message to the consumer'%>
         <%= submit_tag "Send", :class => 'send_button' %>
       <% end %>
       
@@ -18,8 +19,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/javascript">
-    <%= render :partial => 'email_provider',
-               :formats => [:js] %>
-</script>

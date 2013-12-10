@@ -1,0 +1,29 @@
+$(document).ready(function() {
+	$(".msg_form").submit(function(e) {
+
+		alert('haha');
+
+		$(this).parent().parent().parent().parent().modal('toggle')
+
+	    var postData = $(this).serializeArray();
+	    var formURL = $(this).attr("action");
+
+	    $.ajax(
+	    {
+	        url : formURL,
+	        type: "POST",
+	        data : postData,
+	        dataType : 'json',
+	        success:function(data, textStatus, jqXHR) 
+	        {
+	        },
+	        error: function(jqXHR, textStatus, errorThrown) 
+	        {
+	        	alert('error');	
+	        }
+	    });
+
+	    e.preventDefault();
+	});
+	 
+});

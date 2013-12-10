@@ -40,3 +40,8 @@
 	</div>
 </div>
 
+<% unless user && user == resource.provider %>
+	<%= render :partial => 'email_provider_modal',
+		       :locals => { :resource => @resource } %>
+<% end %>
+
