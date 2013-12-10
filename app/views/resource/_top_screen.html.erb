@@ -36,7 +36,17 @@
 			<h3 class="detail_rsrc_sec">Description</h3>
 			<p><%= resource.description %></p>
 		</div>
-
 	</div>
 </div>
 
+<div class="screen_edit">
+	<div class="screen_inner_edit">
+		<%= render :partial => 'resource/edit_resource_form', 
+		   :locals => {:method => :put, :url => resource_url(resource), :form_id => 'edit_resource_form'} %>
+	</div>
+</div>
+
+<script type="text/javascript">
+    <%= render :partial => 'resource_modif',
+               :formats => [:js] %>
+</script>

@@ -189,7 +189,7 @@ a {text-decoration: none}
 	margin-top: 52px;
 	padding-bottom: 80px;
 	width: 100%;
-	min-width: 960px;
+	min-width: 1200px;
 
 	position: absolute;
 }
@@ -228,7 +228,6 @@ a {text-decoration: none}
 
 .dashboard {
 	width: 66%;
-	min-width: 700px;
 	position: relative;
 	margin-left: 5%;
 	float: left;
@@ -367,12 +366,13 @@ a {text-decoration: none}
 
 .new_resource_time label {
 	position: relative;
-	left: 15px;
+	text-indent: 15px;
 }
 
 .new_resource_time div {
 	float: right;
-	width: 50%;
+	width: 49%;
+	margin-right: 2px;
 	display: inline-block;
 	position: relative;
 }
@@ -387,7 +387,7 @@ a {text-decoration: none}
 	position: relative;
 	float: left;
 	top: 10px;
-	width: 97%;
+	width: 97.2%;
 	margin-left: .65%;
 	margin-right: .65%;
 	height: 90px;
@@ -464,7 +464,7 @@ a {text-decoration: none}
 	position: relative;
 	left: 30px;
 	float: left;
-	width: 21.7%;
+	width: 21.5%;
 	
 }
 
@@ -525,6 +525,29 @@ a {text-decoration: none}
 	background-image: -ms-linear-gradient(90deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
 	background-image: linear-gradient(0deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
 	box-shadow: 0px 1px 3px rgb(190,190,190);
+
+}
+
+.screen_edit {
+	position: relative;
+	margin-top: 52px;
+	width: 100%;
+	background: rgb(248,248,248);
+	z-index: 10;
+	padding-bottom: 5px;
+	border-bottom: 1px solid rgb(180,180,180);
+	min-height: 150px;
+	overflow: auto;
+
+	background-image: -o-linear-gradient(90deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
+	background-image: -moz-linear-gradient(90deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
+	background-image: -webkit-linear-gradient(90deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
+	background-image: -ms-linear-gradient(90deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
+	background-image: linear-gradient(0deg, #F0F0F0 0%, #F5F5F5 39%, #FAFAFA 100%);
+	box-shadow: 0px 1px 3px rgb(190,190,190);
+
+
+	display: none;
 }
 
 .screen p {
@@ -605,9 +628,9 @@ a {text-decoration: none}
 }
 
 .btn_contact,.btn_edit:hover,.btn_contact:hover {
-	background-color: #5aa5ff;
+	background-color: #4d90fe;
+	border: 1px solid #3079ed;
 	color: white;
-	border: 1px solid #4676a1;
 }
 
 .btn_delete:hover {
@@ -637,6 +660,19 @@ a {text-decoration: none}
 	width: 58%;
 }
 
+.screen_inner_edit {
+	margin-top: 5px;
+	width: 1060px;
+	margin-left: auto;
+	margin-right: auto;
+	height: auto;
+	overflow: auto;
+	padding-bottom: 28px;
+}
+
+.screen_inner_edit input[type="text"],.screen_inner_edit input[type="date"],.screen_inner_edit textarea {
+	background-color: white;
+}
 
 
 

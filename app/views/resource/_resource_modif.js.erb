@@ -1,0 +1,11 @@
+$('.btn_edit').click(function () {
+	// body...
+	$('.screen').fadeOut(200);
+	$('.screen_edit').delay(200).fadeIn(200);
+})
+
+$('.btn_close_edit').click(function(e){
+	$('.screen_edit').fadeOut(200);
+	$('.screen').delay(200).fadeIn(200);
+    e.preventDefault();
+});
