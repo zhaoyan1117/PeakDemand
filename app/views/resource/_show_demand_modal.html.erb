@@ -10,19 +10,19 @@
       <div class="modal-body">
 
         <span class="demand_intensity"></span>
-        from <span class="demand_start_at"></span> to <span class="demand_end_at"></span>
+        <span class="demand_date">
+          <i>from </i><span class="demand_start_at"></span> <i>to</i> <span class="demand_end_at"></span>
+        </span>
 
         <div class="demand_description"></div>
 
-        <br>
-    
         <% if user %>
           <%= form_for :mail, :method => :post, :url => mail_consumer_url, :html => {:class => 'msg_form'} do |f|  %>
-              <%= f.label :To %>
+              Contact Resoucer Consumer:
               <%= f.hidden_field :demand_id %>
               <%= f.text_field :to, readonly: true, :class => 'msg_email', :id => 'demand_consumer_email' %><br/>
               <%= f.text_area :body, :class=> 'msg_body', :placeholder=> 'Send a message to the consumer'%>
-            <%= submit_tag "Send", :class => 'send_button' %>
+            <%= submit_tag "Send", :class => 'send_button btn_contact' %>
           <% end %>
     
         <% else %>

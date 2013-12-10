@@ -1,6 +1,6 @@
 <div class="bottom_screen">
     <div class="left_screen">
-        <h3 class="detail_rsrc_sec">Demand Calendar <span id='copy_clipboard' data-clipboard-text="<%= cgi_cal_id %>">Copy</span></h3>
+        <div><span  class="detail_rsrc_title">Demand Calendar</span> <span id='copy_clipboard' data-clipboard-text="<%= cgi_cal_id %>"><%= image_tag "gcal.png"%></span></div>
         <script>
             <%= render :partial => 'copy_clipboard',
                        :formats => [:js] %>
@@ -15,7 +15,7 @@
     </div>
 
     <div class="right_screen">
-        <h3 class="detail_rsrc_sec">Demand List</h3>
+        <div><span class="detail_rsrc_title">Demand List</span></div>
 
         <% if resource.demands.empty? %>
             <p> There is no demand on this resource currently!</p>
@@ -28,7 +28,7 @@
 
             <% if user && user.is_consumer %>
                 <%= link_to new_resource_demand_url(resource) do %>
-                    <div class="new_demand"><span class="new_demand_content">Add a new demand</span></div>
+                    <div class="new_demand"><span class="new_demand_content">Add a New Demand</span></div>
                 <% end %>
             <% end %>
 
@@ -38,9 +38,17 @@
  -->
             <% resource.demands.each do |d| %>
                 <%= content_tag "div", :class => "each_demand", :id => "demand_#{d.id}", :data => {target: "#show_demand_modal", toggle: "modal", id: d.id, url: resource_demand_url(resource, d)} do %>
-                    <span class="each_demand_content"><span class="each_demand_consumer"><%= d.consumer_name %></span></span>
-                    <span class="each_demand_content"><span class="each_demand_intensity <%= d.intensity %>_color"><%= d.intensity %></span></span>
-                    <span class="each_demand_content">from <%= d.start_at %> to <%= d.end_at %></span>
+                    <div class="each_demand_1nd">
+                        <span class="each_demand_consumer"><%= d.consumer_name %></span>
+                        <span class="each_demand_short"><%= d.short_description %></span>
+                    </div>
+
+                    <div class="each_demand_2nd">
+                        <span class="each_demand_content"><span class="each_demand_intensity <%= d.intensity %>_color"><%= d.intensity %></span></span>
+                        <span class="each_demand_content each_demand_content_right"><i>from</i> <%= d.start_at %> <i>to</i> <%= d.end_at %></span>
+                    </div>
+
+                    
                 <% end %>
             <% end %>
         <% end %>

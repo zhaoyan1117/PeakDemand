@@ -4,6 +4,9 @@ $(document).ready(function() {
             "<%= calendar_xml_feed %>"
         ),
 		eventClick: function(calEvent, jsEvent, view) {
+	        
+
+			alert(calEvent.id);
 	        alert('Event: ' + calEvent.title);
 	        alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
 	        alert('View: ' + view.name);
@@ -11,6 +14,24 @@ $(document).ready(function() {
 	        // change the border color just for fun
 	        $(this).css('border-color', 'red');
 			return false;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		},
+		eventMouseover: function( event, jsEvent, view ) { 
+
 		}
     });
 });
